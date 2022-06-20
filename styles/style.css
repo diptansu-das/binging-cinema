@@ -1331,7 +1331,7 @@ a:focus {
 .select2-drop,
 .select2-search,
 .select2-search input {
-    -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   /* webkit */
   -moz-box-sizing: border-box;
   /* firefox */
@@ -1993,6 +1993,7 @@ input[type=number]::-webkit-inner-spin-button:after {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+
 .container__info {
   cursor: default;
 }
@@ -2312,7 +2313,7 @@ main {
   top: 100%;
   left: 50%;
   padding: 50px;
-    margin-top: 5rem;
+  margin-top: 5rem;
 }
 
 .movie {
@@ -2322,6 +2323,7 @@ main {
   overflow: hidden;
   border-radius: 0.19rem;
 }
+
 .movie:hover {
   cursor: pointer;
 }
@@ -2385,13 +2387,13 @@ main {
 
 
 .front {
-    font-family: 'Alegreya Sans SC', sans-serif;
-   float: none;
+  font-family: 'Alegreya Sans SC', sans-serif;
+  float: none;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
- 
+
 }
 
 @media screen and (min-width: 601px) {
@@ -2407,6 +2409,7 @@ main {
     font-size: 1.725rem;
 
   }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -2434,6 +2437,7 @@ main {
     height: 3rem;
     font-size: 1.3rem;
   }
+
 }
 
 .front button {
@@ -2584,4 +2588,54 @@ main {
     background-image: url(https://wallpapercave.com/wp/wp4056401.png);
   }
 
+}
+
+/* filter */
+.wrapper {
+  width: 95%;
+  margin: 0 auto;
+}
+
+#search-container {
+  margin: 1em 0;
+}
+
+#search-container input {
+  background-color: transparent;
+  width: 40%;
+  border-bottom: 2px solid #c4b700;
+  padding: 1em 0.3em;
+  margin-left: 14rem;
+  margin-top: 0.5em;
+}
+
+#search-container input:focus {
+  border-bottom-color: #c4b700;
+}
+
+#search-container button {
+  padding: 1em 2em;
+  margin-left: -24em;
+  background-color: #c4b700;
+  color: #ffffff;
+  border-radius: 5px;
+  margin-top: 7.5em;
+}
+
+.button-value {
+  border: 2px solid #c4b700;
+  padding: 1em 2.2em;
+  border-radius: 3em;
+  background-color: transparent;
+  color: #c4b700;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #c4b700;
+  color: #ffffff;
+}
+
+.hide {
+  display: none;
 }

@@ -4002,58 +4002,75 @@ $('.container__list-of-shows').on('click touchstart', '.js-remove-item', functio
 })
 
 // diptansu is editing 
-const main = document.getElementById('main')
-let year = Math.floor(Math.random() * 20);
-let page = Math.floor(Math.random() * 50) + 1;
-if (year <= 9) {
-    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=18&primary_release_year=200${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
-    getMovies(API_URl)
-}
-else {
-
-    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=18&primary_release_year=20${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
-    getMovies(API_URl)
-}
-
-const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
-
-//get intial movies
-// getMovies(API_URl)
-
-async function getMovies(url) {
-    const res = await fetch(url)
-    const data = await res.json()
-    showMovies(data.results)
-}
-function showMovies(movies) {
-    main.innerHTML = ''
+// random Suggestion
 
 
+document.getElementById("search").addEventListener("click", () => {
+    let searchInput = document.getElementById("search-input").value;
+    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=18&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
+    changeTheDom(API_URl)
 
-    movies.forEach((movie) => {
-        const { title, poster_path, vote_average } = movie
-        const movieEl = document.createElement('div')
-        movieEl.classList.add('movie')
-        movieEl.innerHTML = `
-        <img src="${IMG_PATH + poster_path}" alt="${title}" onerror="this.src='images/error.png'">
-        <div class="movie-info">
-            <h3>${title}</h3>
-            <span class="${getClassByrate(vote_average)}">${vote_average}</span>
-                
-      </div>`
+});
 
-        main.appendChild(movieEl)
-    })
-}
 
-function getClassByrate(vote) {
-    if (vote >= 8) {
-        return 'green'
-    }
-    else if (vote >= 5) {
-        return 'orange'
+window.onload = () => {
+    let year = Math.floor(Math.random() * 20);
+    console.log(year);
+    let page = Math.floor(Math.random() * 50) + 1;
+    console.log(page);
+    if (year <= 9) {
+        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=18&primary_release_year=200${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
+        changeTheDom(API_URl1)
     }
     else {
-        return 'red'
+
+        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=18&primary_release_year=20${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
+        changeTheDom(API_URl1)
     }
+};
+
+
+
+
+function changeTheDom(url1) {
+    const main = document.getElementById('main')
+    const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
+    getMovies(url1)
+
+    async function getMovies(url) {
+        const res = await fetch(url)
+        const data = await res.json()
+        showMovies(data.results)
+    }
+
+    function getClassByrate(vote) {
+        if (vote >= 8) {
+            return 'green'
+        }
+        else if (vote >= 5) {
+            return 'orange'
+        }
+        else {
+            return 'red'
+        }
+    }
+
+    function showMovies(movies) {
+        main.innerHTML = ''
+        movies.forEach((movie) => {
+            const { title, poster_path, vote_average } = movie
+            const movieEl = document.createElement('div')
+            movieEl.classList.add('movie')
+            movieEl.innerHTML = `
+            <img src="${IMG_PATH + poster_path}" alt="${title}" onerror="this.src='images/error.png'">
+            <div class="movie-info">
+                <h3>${title}</h3>
+                <span class="${getClassByrate(vote_average)}">${vote_average}</span>
+                    
+          </div>`
+
+            main.appendChild(movieEl)
+        })
+    }
+
 }

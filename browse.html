@@ -19,11 +19,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
   <style>
     .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            z-index: 100;
-        }
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
+    }
   </style>
 
 </head>
@@ -54,6 +54,16 @@
       </div>
     </div>
   </div>
+
+  <!-- filter option  -->
+  <div class="wrapper">
+    <div id="search-container">
+      <input type="search" id="search-input" placeholder="By Movie Year" />
+      <button id="search">Search</button>
+    </div>
+  </div>
+
+
   <!-- randome Suggestion -->
   <main id="main">
 
@@ -89,9 +99,12 @@
   <script src="https://cdn.jsdelivr.net/sharer.js/latest/sharer.min.js"></script>
   <script>
 
-    window.setTimeout(function () {
-      window.location.reload();
-    }, 300000);
+    // window.setTimeout(function () {
+    //   window.location.reload();
+    // }, 300000);
+
+
+    
     // (function (i, s, o, g, r, a, m) {
     //   i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
     //     (i[r].q = i[r].q || []).push(arguments)
