@@ -1711,7 +1711,7 @@ a:focus {
 
 .about__icon {
   font-size: 2em;
-  position: absolute;
+  position: fixed;
   right: .5%;
   top: 1%;
   padding: 32px;
@@ -2298,8 +2298,6 @@ input,
   margin-right: 1em;
   bottom: 0px;
   margin: 30px;
-  margin: 21px 46px;
-
 }
 
 .social-icon {
@@ -2420,7 +2418,6 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 20rem;
   }
 
   .logo {
@@ -2437,11 +2434,6 @@ main {
     height: 3rem;
     font-size: 1.3rem;
   }
-  .social {
-  
-    margin: 1.5rem 2rem;
-  }
-
 }
 
 .front button {
