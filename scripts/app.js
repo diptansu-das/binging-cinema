@@ -4003,11 +4003,59 @@ $('.container__list-of-shows').on('click touchstart', '.js-remove-item', functio
 
 // diptansu is editing 
 // random Suggestion
+// date dropdpwn
+let dateDropdown = document.getElementById('date-dropdown');
 
+let currentYear = new Date().getFullYear();
+let earliestYear = 1970;
 
-document.getElementById("search").addEventListener("click", () => {
-    let searchInput = document.getElementById("search-input").value;
-    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=18&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
+while (currentYear >= earliestYear) {
+    let dateOption = document.createElement('option');
+    dateOption.text = currentYear;
+    dateOption.value = currentYear;
+    dateDropdown.add(dateOption);
+    currentYear -= 1;
+}
+// display value to  
+const Genre_Map = new Map();
+Genre_Map.set('Action ', 28);
+Genre_Map.set('Adventure', 12);
+Genre_Map.set('Animation', 16);
+Genre_Map.set('Crime', 80);
+Genre_Map.set('Comedy', 35);
+Genre_Map.set('Documentary ', 99);
+Genre_Map.set('Drama', 18);
+Genre_Map.set('Family', 10751);
+Genre_Map.set('Fantasy', 14);
+Genre_Map.set('History', 36);
+Genre_Map.set('Horror', 27);
+Genre_Map.set('Music  ',10402);
+Genre_Map.set('Mystery',9648);
+Genre_Map.set('Romance',10749);
+Genre_Map.set('Science Fiction', 878);
+Genre_Map.set('TV Movie', 10770);
+Genre_Map.set('Thriller', 53);
+Genre_Map.set('War', 10752);
+Genre_Map.set('Western', 37);
+Genre_Map.set('All', 10179);
+
+// Get Value and Display Items
+
+document.getElementById("date-dropdown").addEventListener("click", () => {
+
+    let gerneInput=document.getElementById("genre-dropdown").value;
+    let key=Genre_Map.get(gerneInput);
+    let searchInput = document.getElementById("date-dropdown").value;
+    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${key}&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
+    changeTheDom(API_URl)
+
+});
+document.getElementById("genre-dropdown").addEventListener("click", () => {
+
+    let gerneInput=document.getElementById("genre-dropdown").value;
+    let key=Genre_Map.get(gerneInput);
+    let searchInput = document.getElementById("date-dropdown").value;
+    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${key}&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
     changeTheDom(API_URl)
 
 });
@@ -4015,16 +4063,14 @@ document.getElementById("search").addEventListener("click", () => {
 
 window.onload = () => {
     let year = Math.floor(Math.random() * 20);
-    console.log(year);
     let page = Math.floor(Math.random() * 50) + 1;
-    console.log(page);
     if (year <= 9) {
-        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=18&primary_release_year=200${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
+        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=200${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
         changeTheDom(API_URl1)
     }
     else {
 
-        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=18&primary_release_year=20${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
+        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=20${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
         changeTheDom(API_URl1)
     }
 };
@@ -4074,3 +4120,8 @@ function changeTheDom(url1) {
     }
 
 }
+
+
+
+
+
