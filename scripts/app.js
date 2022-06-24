@@ -4152,7 +4152,19 @@ document.getElementById("genre-dropdown").addEventListener("click", () => {
 
 document.querySelector("#featured").addEventListener("click", () => {
     console.log("featured is clicked");
-    window.onload();
+    let year = Math.floor(Math.random() * 20);
+    console.log("year is " + year);
+    let page = Math.floor(Math.random() * 50) + 1;
+    console.log("page is " + page);
+    if (year <= 9) {
+        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=200${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
+        changeTheDom(API_URl1)
+    }
+    else {
+
+        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=20${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
+        changeTheDom(API_URl1)
+    }
 });
 
 document.querySelector("#popular").addEventListener("click", () => {
@@ -4169,11 +4181,6 @@ document.querySelector("#trending").addEventListener("click", () => {
     changeTheDom(API_URl);
 });
 
-document.getElementById("tbclick").addEventListener("click", () => {
-    let searchInput = document.getElementById("search-value").value;
-    const API_URl = `https://api.themoviedb.org/3/search/movie?api_key=594c8f852d2f55546b5698acac88ae46&query=${searchInput}`;
-    changeTheDom(API_URl);
-});
 
 
 
