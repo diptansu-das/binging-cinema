@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width" />
 
   <link rel="stylesheet" type="text/css" href="styles/style.css" />
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
   <style>
@@ -48,7 +48,7 @@
         <nav class="navbar">
           <a href="index.html">Home</a>
           <a href="form.html">TimeLine</a>
-          <a href="browse.html">Random Suggestion</a>
+          <a href="browse.html">WatchList</a>
         </nav>
 
       </div>
@@ -56,41 +56,54 @@
   </div>
   
   <!-- filter movies -->
-<div class="year">
-        <select id='date-dropdown' class="search-category1">
-          <option>Year</option>
+
+    <div class="filter-bar">
+
+      <div class="filter-dropdowns">
+
+        <select name="genre"  id='genre-dropdown' class="genre">
+          <option value="all genres">All genres</option>
         </select>
+
+        <select name="year" id='date-dropdown' class="year">
+          <option value="all years">Years</option>
+        </select>
+
       </div>
-<div class="genre">
-        
-        <select id='genre-dropdown'>
-          <option>All</option>
-          <option>Action</option>
-          <option>Adventure</option>
-          <option>Animation</option>
-          <option>Comedy</option>
-          <option>Crime</option>
-          <option>Documentary</option>
-          <option>Drama</option>
-          <option>Family</option>
-          <option>Fantasy</option>
-          <option>History</option>
-          <option>Horror</option>
-          <option>Music</option>
-          <option>Mystery</option>
-          <option>Romance</option>
-          <option>Science Fiction</option>
-          <option>TV Movie</option>
-          <option>Thriller </option>
-          <option>War</option>
-          <option>Western</option>
-          </select>
-        </div>
+      
+      
+        <div class="radio-toolbar">
+          <input type="radio" id="featured" name="radioFruit" value="apple" checked>
+          <label for="featured">Featured</label>
+      
+          <input type="radio" id="popular" name="radioFruit" value="banana">
+          <label for="popular">Popular</label>
+      
+          <input type="radio" id="trending" name="radioFruit" value="orange">
+          <label for="trending">Trending</label> 
+      </div>
+
+      
+      <div class="box">
+        <form name="search">
+            <input type="text" class="input" id="search-value" name="txt" onmouseout="this.value = ''; this.blur();">
+        </form>
+        <i class="fas fa-search"></i>
+    
+      </div>
+    </div>
+
+
 
   <!-- randome Suggestion -->
   <main id="main">
 
   </main>
+
+<!--pages from javascript -->
+  <div class="pagination">
+    <ul id="page-selector">  </ul>
+  </div>
 
   <!-- 126.42 -->
   <!-- Social Media Icons   -->
@@ -98,17 +111,17 @@
   <footer class="footer">
     <div class="social">
 
-      <a href="https://www.facebook.com/bingingcinema" id="share-fb" class="sharer button"><i
-          class="fa fa-3x fa-facebook-square  social-icon  "></i></a>
+      <a href="https://www.facebook.com/bingingcinema" id="share-fb" class="sharer button"><i class="fab fa-3x fa-facebook-square social-icon"></i></a>
       <a href="https://www.instagram.com/binging__cinema/" id="share-in" class="sharer button"><i
-          class="fa fa-3x fa-instagram  social-icon"></i></a>
+          class="fab fa-3x fa-instagram social-icon"></i></a>
       <a href="https://www.twitter.com/binging__cinema/" id="share-tw" class="sharer button"><i
-          class="fa fa-3x fa-twitter-square  social-icon"></i></a>
+          class="fab fa-3x fa-twitter-square social-icon"></i></a>
       <a href="https://interviewerpr.com/binging-cinema-is-sagar-acharys-initiative-to-deliver-quality-content-to-the-masses/"
-        id="share-em" class="sharer button"><i class="fa fa-3x fa-envelope-square social-icon"></i></a>
+        id="share-em" class="sharer button"><i class="fas fa-3x fa-envelope-square social-icon"></i></a>
     </div>
 
   </footer>
+
 
 
   <!-- Adds TV show background image to site -->

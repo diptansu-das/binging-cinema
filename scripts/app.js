@@ -4016,7 +4016,7 @@ while (currentYear >= earliestYear) {
     dateDropdown.add(dateOption);
     currentYear -= 1;
 }
-// display value to  
+// genre value 
 const Genre_Map = new Map();
 Genre_Map.set('Action ', 28);
 Genre_Map.set('Adventure', 12);
@@ -4029,41 +4029,161 @@ Genre_Map.set('Family', 10751);
 Genre_Map.set('Fantasy', 14);
 Genre_Map.set('History', 36);
 Genre_Map.set('Horror', 27);
-Genre_Map.set('Music  ',10402);
-Genre_Map.set('Mystery',9648);
-Genre_Map.set('Romance',10749);
+Genre_Map.set('Music  ', 10402);
+Genre_Map.set('Mystery', 9648);
+Genre_Map.set('Romance', 10749);
 Genre_Map.set('Science Fiction', 878);
 Genre_Map.set('TV Movie', 10770);
 Genre_Map.set('Thriller', 53);
 Genre_Map.set('War', 10752);
 Genre_Map.set('Western', 37);
-Genre_Map.set('All', 10179);
+
+
+let genreDropdown = document.getElementById('genre-dropdown');
+for (const [key] of Genre_Map) {
+    let genreOption = document.createElement('option');
+    genreOption.text = key;
+    genreDropdown.add(genreOption);
+}
+
+
+//  pages in javascript
+
+const element = document.querySelector(".pagination ul");
+let totalPages = 100;
+let page = 1;
+
+//calling function with passing parameters and adding inside element which is ul tag
+element.innerHTML = createPagination(totalPages, page);
+function createPagination(totalPages, page) {
+    let liTag = '';
+    let active;
+
+    let beforePage = page - 1;
+    let afterPage = page + 1;
+    if (page > 1) { //show the next button if the page value is greater than 1
+        liTag += `<li class="btn prev " onclick="createPagination(totalPages, ${page - 1})"><span><i class="fas fa-angle-left"></i> Prev</span></li>`;
+    }
+
+    if (page > 2) { //if page value is less than 2 then add 1 after the previous button
+        liTag += `<li class="first numb" onclick="createPagination(totalPages, 1)"><span>1</span></li>`;
+        if (page > 3) { //if page value is greater than 3 then add this (...) after the first li or page
+            liTag += `<li class="dots"><span>...</span></li>`;
+        }
+    }
+
+    // how many pages or li show before the current li
+    if (page == totalPages) {
+        beforePage = beforePage - 2;
+    } else if (page == totalPages - 1) {
+        beforePage = beforePage - 1;
+    }
+    // how many pages or li show after the current li
+    if (page == 1) {
+        afterPage = afterPage + 2;
+    } else if (page == 2) {
+        afterPage = afterPage + 1;
+    }
+
+    for (var plength = beforePage; plength <= afterPage; plength++) {
+        if (plength > totalPages) { //if plength is greater than totalPage length then continue
+            continue;
+        }
+        if (plength == 0) { //if plength is 0 than add +1 in plength value
+            plength = plength + 1;
+        }
+        if (page == plength) { //if page is equal to plength than assign active string in the active variable
+            active = "active";
+        } else { //else leave empty to the active variable
+            active = "";
+        }
+        liTag += `<li class="numb ${active}"  onclick="createPagination(totalPages, ${plength})"><span  id="val01" >${plength}</span></li>`;
+    }
+
+    if (page < totalPages - 1) { //if page value is less than totalPage value by -1 then show the last li or page
+        if (page < totalPages - 2) { //if page value is less than totalPage value by -2 then add this (...) before the last li or page
+            liTag += `<li class="dots"><span>...</span></li>`;
+        }
+        liTag += `<li class="last numb" onclick="createPagination(totalPages, ${totalPages})"><span>${totalPages}</span></li>`;
+    }
+
+    if (page < totalPages) { //show the next button if the page value is less than totalPage(20)
+        liTag += `<li class="btn next" onclick="createPagination(totalPages, ${page + 1})"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+    }
+    element.innerHTML = liTag; //add li tag inside ul tag
+    return liTag; //reurn the li tag
+}
+//   alert($('#val-1  span').text()); 
 
 // Get Value and Display Items
-
-document.getElementById("date-dropdown").addEventListener("click", () => {
-
-    let gerneInput=document.getElementById("genre-dropdown").value;
-    let key=Genre_Map.get(gerneInput);
+document.getElementById("page-selector").addEventListener("click", () => {
+    let page_number = parseInt($('#val01').text());
+    console.log("the menu is selceted");
+    let gerneInput = document.getElementById("genre-dropdown").value;
+    let genre_key = Genre_Map.get(gerneInput);
     let searchInput = document.getElementById("date-dropdown").value;
-    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${key}&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
+    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre_key}&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log("the menu1 is selceted with page number " + page_number);
+    changeTheDom(API_URl)
+
+});
+document.getElementById("date-dropdown").addEventListener("click", () => {
+    let page_number = parseInt($('#val01').text());
+    console.log("the menu is selceted");
+    let gerneInput = document.getElementById("genre-dropdown").value;
+    let genre_key = Genre_Map.get(gerneInput);
+    let searchInput = document.getElementById("date-dropdown").value;
+    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre_key}&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log("the menu1 is selceted with page number " + page_number);
     changeTheDom(API_URl)
 
 });
 document.getElementById("genre-dropdown").addEventListener("click", () => {
 
-    let gerneInput=document.getElementById("genre-dropdown").value;
-    let key=Genre_Map.get(gerneInput);
+    let page_number = parseInt($('#val01').text());
+    console.log("the menu is selceted");
+    let gerneInput = document.getElementById("genre-dropdown").value;
+    let genre_key = Genre_Map.get(gerneInput);
     let searchInput = document.getElementById("date-dropdown").value;
-    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${key}&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
+    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre_key}&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log("the menu1 is selceted with page number " + page_number);
     changeTheDom(API_URl)
-
 });
+
+document.querySelector("#featured").addEventListener("click", () => {
+    console.log("featured is clicked");
+    window.onload();
+});
+
+document.querySelector("#popular").addEventListener("click", () => {
+    let page_number = parseInt($('#val01').text());
+    console.log("Popular is clicked");
+    const API_URl = `https://api.themoviedb.org/3/movie/popular?api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`;
+    changeTheDom(API_URl);
+});
+
+document.querySelector("#trending").addEventListener("click", () => {
+    let page_number = parseInt($('#val01').text());
+    console.log("Trending is clicked");
+    const API_URl = `https://api.themoviedb.org/3/trending/all/day?api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`;
+    changeTheDom(API_URl);
+});
+
+document.getElementById("tbclick").addEventListener("click", () => {
+    let searchInput = document.getElementById("search-value").value;
+    const API_URl = `https://api.themoviedb.org/3/search/movie?api_key=594c8f852d2f55546b5698acac88ae46&query=${searchInput}`;
+    changeTheDom(API_URl);
+});
+
+
+
 
 
 window.onload = () => {
     let year = Math.floor(Math.random() * 20);
+    console.log("year is " + year);
     let page = Math.floor(Math.random() * 50) + 1;
+    console.log("page is " + page);
     if (year <= 9) {
         const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=200${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
         changeTheDom(API_URl1)
