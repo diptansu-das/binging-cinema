@@ -2708,7 +2708,7 @@ select {
 }
 
 .radio-toolbar {
-  background-color: black;
+  /* background-color: black; */
   margin: 10px;
 }
 
@@ -2716,6 +2716,7 @@ select {
   opacity: 0;
   position: fixed;
   width: 0;
+  padding: 0;
 }
 
 .radio-toolbar label {
@@ -2729,7 +2730,7 @@ select {
 }
 
 .radio-toolbar label:hover {
-  background-color: #dfd;
+  background-color: #000;
 }
 
 .radio-toolbar input[type="radio"]:focus+label {
@@ -2745,14 +2746,13 @@ select {
   position: relative;
 
 }
-
-
-.input {
-  padding: 9px;
-  width: 50px;
+ .input {
+  padding: 25px;
+  width: 100%;
   height: 47px;
-  background: none;
+  background: black;
   border: hidden;
+  border-color: #c4b700;
   border-radius: 50px;
   box-sizing: border-box;
   font-family: Comic Sans MS;
@@ -2766,6 +2766,7 @@ select {
   width: 350px;
   background: none;
   border-radius: 10px;
+
   border: 4px solid #ffd52d;
 }
 

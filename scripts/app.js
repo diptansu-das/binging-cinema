@@ -4117,17 +4117,29 @@ function createPagination(totalPages, page) {
 
 // Get Value and Display Items
 document.getElementById("page-selector").addEventListener("click", () => {
-    let page_number = parseInt($('#val01').text());
-    console.log("the menu is selceted");
-    let gerneInput = document.getElementById("genre-dropdown").value;
-    let genre_key = Genre_Map.get(gerneInput);
-    let searchInput = document.getElementById("date-dropdown").value;
-    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre_key}&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
-    console.log("the menu1 is selceted with page number " + page_number);
-    changeTheDom(API_URl)
+    let searchInput = document.getElementById("search-value").value;
+    if (searchInput == '') {
+        let page_number = parseInt($('#val01').text());
+        console.log("the menu is selceted");
+        let gerneInput = document.getElementById("genre-dropdown").value;
+        let genre_key = Genre_Map.get(gerneInput);
+        let searchInput = document.getElementById("date-dropdown").value;
+        const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre_key}&primary_release_year=${searchInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+        console.log("the menu1 is selceted with page number " + page_number);
+        changeTheDom(API_URl)
+
+    }
+    else {
+        let page_number = parseInt($('#val01').text());
+        console.log(searchInput);
+        const API_URl = `https://api.themoviedb.org/3/search/movie?api_key=594c8f852d2f55546b5698acac88ae46&query=${searchInput}&page=${page_number}`;
+        changeTheDom(API_URl);
+    }
 
 });
 document.getElementById("date-dropdown").addEventListener("click", () => {
+
+    document.getElementById('search-value').value = ''
     let page_number = parseInt($('#val01').text());
     console.log("the menu is selceted");
     let gerneInput = document.getElementById("genre-dropdown").value;
@@ -4139,7 +4151,7 @@ document.getElementById("date-dropdown").addEventListener("click", () => {
 
 });
 document.getElementById("genre-dropdown").addEventListener("click", () => {
-
+    document.getElementById('search-value').value = ''
     let page_number = parseInt($('#val01').text());
     console.log("the menu is selceted");
     let gerneInput = document.getElementById("genre-dropdown").value;
@@ -4150,7 +4162,9 @@ document.getElementById("genre-dropdown").addEventListener("click", () => {
     changeTheDom(API_URl)
 });
 
+
 document.querySelector("#featured").addEventListener("click", () => {
+    document.getElementById('search-value').value = ''
     console.log("featured is clicked");
     let year = Math.floor(Math.random() * 20);
     console.log("year is " + year);
@@ -4165,9 +4179,11 @@ document.querySelector("#featured").addEventListener("click", () => {
         const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=20${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
         changeTheDom(API_URl1)
     }
+
 });
 
 document.querySelector("#popular").addEventListener("click", () => {
+    document.getElementById('search-value').value = ''
     let page_number = parseInt($('#val01').text());
     console.log("Popular is clicked");
     const API_URl = `https://api.themoviedb.org/3/movie/popular?api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`;
@@ -4175,12 +4191,20 @@ document.querySelector("#popular").addEventListener("click", () => {
 });
 
 document.querySelector("#trending").addEventListener("click", () => {
+    document.getElementById('search-value').value = ''
     let page_number = parseInt($('#val01').text());
     console.log("Trending is clicked");
     const API_URl = `https://api.themoviedb.org/3/trending/all/day?api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`;
     changeTheDom(API_URl);
 });
 
+document.querySelector("#btn-search").addEventListener("click", () => {
+    let searchInput = document.getElementById("search-value").value;
+    let page_number = parseInt($('#val01').text());
+    console.log(searchInput);
+    const API_URl = `https://api.themoviedb.org/3/search/movie?api_key=594c8f852d2f55546b5698acac88ae46&query=${searchInput}&page=${page_number}`;
+    changeTheDom(API_URl);
+})
 
 
 
