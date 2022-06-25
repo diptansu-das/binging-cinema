@@ -2319,7 +2319,7 @@ main {
 }
 
 .movie {
-  width: 260px;
+  width: 235px;
   margin: 1rem;
   position: relative;
   overflow: hidden;
@@ -2398,50 +2398,6 @@ main {
 
 }
 
-@media screen and (min-width: 601px) {
-  .front {
-    font-size: 1.5rem;
-    width: 42rem;
-  }
-
-  .front button {
-
-    width: 15.312999999999999rem;
-    height: 4.562999999999999rem;
-    font-size: 1.725rem;
-
-  }
-
-}
-
-@media screen and (max-width: 600px) {
-
-  .front {
-    width: 17rem;
-    float: none;
-    font-size: 15px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .logo {
-    top: 2.791rem;
-    left: 2rem;
-  }
-
-  .logo-text {
-    font-size: 2rem;
-  }
-
-  .front button {
-    width: 12rem;
-    height: 3rem;
-    font-size: 1.3rem;
-  }
-
-}
 
 .front button {
   position: relative;
@@ -2519,7 +2475,7 @@ main {
   z-index: -1;
   width: 100%;
   height: 100%;
-  background-image: url("../images/831179.jpg");
+  /* background-image: url("../images/831179.jpg"); */
   background-size: cover;
   background-position: 50% 0%;
   /* -webkit-filter: blur(4px); */
@@ -2538,9 +2494,65 @@ main {
   -ms-transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  animation: slideBg 1000s linear infinite 0s;
+  /* animation: slideBg 1000s linear infinite 0s; */
   animation-timing-function: step-end;
 }
+
+
+@media screen and (min-width: 601px) {
+  .front {
+    font-size: 1.5rem;
+    width: 42rem;
+  }
+
+  .front button {
+
+    width: 15.312999999999999rem;
+    height: 4.562999999999999rem;
+    font-size: 1.725rem;
+
+  }
+  .bg{
+    background-image: url("../images/831179.jpg");
+    animation: slideBg 1000s linear infinite 0s;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .front {
+    width: 17rem;
+    float: none;
+    font-size: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .logo {
+    top: 2.791rem;
+    left: 2rem;
+  }
+
+  .logo-text {
+    font-size: 2rem;
+  }
+
+  .front button {
+    width: 12rem;
+    height: 3rem;
+    font-size: 1.3rem;
+  }
+
+  .bg{
+    background-image: url("../images/831179.jpg");
+    animation: slideBBg 1000s linear infinite 0s;
+  }
+
+}
+
 
 @keyframes slideBg {
   0% {
@@ -2593,31 +2605,60 @@ main {
 
 }
 
+
+@keyframes slideBBg {
+  0% {
+    background-image: url(https://wallpaperaccess.com/full/5363709.jpg);
+  }
+  10% {
+    background-image: url(https://wallpaperaccess.com/full/4405976.jpg);
+  }
+  20% {
+    background-image: url(https://wallpaperaccess.com/full/2111315.jpg);
+  }
+
+  30% {
+    background-image: url(https://wallpapers.com/images/high/good-omens-phone-wallpaper-in-2019-movie-wallpaper-go-rfyk2y7y245fndra.jpg);
+  }
+  40% {
+    background-image: url(https://mfiles.alphacoders.com/961/961142.jpg);
+  }
+  50% {
+    background-image: url(https://i.pinimg.com/originals/cd/6a/4e/cd6a4e46932a1edbbee57d3535592700.jpg);
+  }
+  60% {
+    background-image: url(https://i.pinimg.com/originals/6d/1a/aa/6d1aaaa9b91648623cab43bb4d29b393.jpg);
+  }
+
+  70% {
+    background-image: url(https://r1.ilikewallpaper.net/iphone-12-pro-max-wallpapers/download-149005/uncharted-2022.jpg);
+  }
+  80% {
+    background-image: url(https://pakpublishers.com/wallpapers/entertainment/movies/1/marvels-movie-wallpaper.jpeg);
+  }
+  90% {
+    background-image: url(https://wallpapers.com/images/high/good-omens-phone-wallpaper-in-2019-movie-wallpaper-go-rfyk2y7y245fndra.jpg);
+  }
+  100% {
+    background-image: url(https://wallpapercave.com/wp/wp4161404.jpg);
+  }
+
+  
+
+}
+
 select {
   border: 0px;
   border-bottom: 2px solid #c4b700;
   outline: 0px;
 }
 
-/* #search-container {
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-  top: 6rem;
-} */
-
-
-/* pages  */
-
 .pagination ul {
-  /* width: 100%; */
   display: flex;
-  /* flex-wrap: wrap; */
   justify-content: center;
-  /* background: #fff; */
+  
   padding: 8px;
+  bottom:0;
   border-radius: 50px;
   box-shadow: 0px 10px 15px rgb(0 0 0 / 10%);
 }
@@ -2700,7 +2741,7 @@ select {
 .filter-dropdowns select {
   height: 2rem;
   font-size: 1.5rem;
-  width: 11rem;
+  width: 8rem;
   border: none;
   background: none;
   --theme-color: #f9e900;
@@ -2708,7 +2749,6 @@ select {
 }
 
 .radio-toolbar {
-  /* background-color: black; */
   margin: 10px;
 }
 
@@ -2721,12 +2761,11 @@ select {
 
 .radio-toolbar label {
   display: inline-block;
-  /* background-color: #ddd; */
+  
   padding: 10px 20px;
   font-family: sans-serif, Arial;
   font-size: 16px;
-  /* border: 2px solid #444; */
-  border-radius: 4px;
+   border-radius: 4px;
 }
 
 .radio-toolbar label:hover {

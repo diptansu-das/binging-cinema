@@ -4204,8 +4204,7 @@ document.querySelector("#btn-search").addEventListener("click", () => {
     console.log(searchInput);
     const API_URl = `https://api.themoviedb.org/3/search/movie?api_key=594c8f852d2f55546b5698acac88ae46&query=${searchInput}&page=${page_number}`;
     changeTheDom(API_URl);
-})
-
+});
 
 
 
