@@ -2512,7 +2512,8 @@ main {
     font-size: 1.725rem;
 
   }
-  .bg{
+
+  .bg {
     background-image: url("../images/831179.jpg");
     animation: slideBg 1000s linear infinite 0s;
   }
@@ -2546,7 +2547,7 @@ main {
     font-size: 1.3rem;
   }
 
-  .bg{
+  .bg {
     background-image: url("../images/831179.jpg");
     animation: slideBBg 1000s linear infinite 0s;
   }
@@ -2610,9 +2611,11 @@ main {
   0% {
     background-image: url(https://wallpaperaccess.com/full/5363709.jpg);
   }
+
   10% {
     background-image: url(https://wallpaperaccess.com/full/4405976.jpg);
   }
+
   20% {
     background-image: url(https://wallpaperaccess.com/full/2111315.jpg);
   }
@@ -2620,12 +2623,15 @@ main {
   30% {
     background-image: url(https://wallpapers.com/images/high/good-omens-phone-wallpaper-in-2019-movie-wallpaper-go-rfyk2y7y245fndra.jpg);
   }
+
   40% {
     background-image: url(https://mfiles.alphacoders.com/961/961142.jpg);
   }
+
   50% {
     background-image: url(https://i.pinimg.com/originals/cd/6a/4e/cd6a4e46932a1edbbee57d3535592700.jpg);
   }
+
   60% {
     background-image: url(https://i.pinimg.com/originals/6d/1a/aa/6d1aaaa9b91648623cab43bb4d29b393.jpg);
   }
@@ -2633,17 +2639,20 @@ main {
   70% {
     background-image: url(https://r1.ilikewallpaper.net/iphone-12-pro-max-wallpapers/download-149005/uncharted-2022.jpg);
   }
+
   80% {
     background-image: url(https://pakpublishers.com/wallpapers/entertainment/movies/1/marvels-movie-wallpaper.jpeg);
   }
+
   90% {
     background-image: url(https://wallpapers.com/images/high/good-omens-phone-wallpaper-in-2019-movie-wallpaper-go-rfyk2y7y245fndra.jpg);
   }
+
   100% {
     background-image: url(https://wallpapercave.com/wp/wp4161404.jpg);
   }
 
-  
+
 
 }
 
@@ -2656,9 +2665,9 @@ select {
 .pagination ul {
   display: flex;
   justify-content: center;
-  
+
   padding: 8px;
-  bottom:0;
+  bottom: 0;
   border-radius: 50px;
   box-shadow: 0px 10px 15px rgb(0 0 0 / 10%);
 }
@@ -2761,11 +2770,11 @@ select {
 
 .radio-toolbar label {
   display: inline-block;
-  
+
   padding: 10px 20px;
   font-family: sans-serif, Arial;
   font-size: 16px;
-   border-radius: 4px;
+  border-radius: 4px;
 }
 
 .radio-toolbar label:hover {
@@ -2781,45 +2790,171 @@ select {
   border-color: #c4b700;
 }
 
-.box {
+#search {
+  display: flex;
+}
+
+#search-value {
+  height: -0.5rem;
+  width: 11rem;
+  height: 1.5rem;
+  font-size: 1.5rem;
+  height: 2.5rem;
+  border: none;
+  padding: 0;
+  /* border: 2px solid yellow; */
+}
+
+#search-value::placeholder {
+  padding: 0;
+}
+
+#btn-search {
+  height: 2rem;
+  width: 5rem;
+  margin-top: 0.34rem;
+  background-color: #c4b700;
+  border: none;
+  border-radius: 5px;
+}
+
+
+/* details page */
+#details-page {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(128, 128, 128, 0.71);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#card {
+  width: 40rem;
+  height: 31rem;
   position: relative;
-
+  background: rgb(30, 26, 26);
+  font-family: sans-serif;
 }
- .input {
-  padding: 25px;
-  width: 100%;
-  height: 47px;
+
+.card-body {
+  
+  width: 40rem;
+  height: 27rem;
+  padding: 0 4.4rem;
+  position: relative;
+  top: 2rem;
+  margin: auto;
+}
+
+#card-name {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  text-align: center;
   background: black;
-  border: hidden;
-  border-color: #c4b700;
-  border-radius: 50px;
-  box-sizing: border-box;
-  font-family: Comic Sans MS;
-  font-size: 26px;
-  color: #ffd52d;
-  outline: none;
-  transition: .5s;
+  color: white;
+  padding: 0.3rem 2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-.box:hover input {
-  width: 350px;
-  background: none;
-  border-radius: 10px;
-
-  border: 4px solid #ffd52d;
+#card-img {
+  width: 30rem;
+  height: 18rem;
+  margin: 0.5rem 0;
 }
 
-.box i {
+#card-title,
+#card-rating,
+#card-language,
+#card-description,
+#card-date {
+  margin: 0.5rem 0;
+}
+
+#close {
   position: absolute;
-  top: 50%;
-  left: 25px;
-  transform: translate(-50%, -50%);
-  font-size: 26px;
-  color: #ffd52d;
-  transition: .2s;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  right: 0;
+  background: 0;
+  color: grey;
+  padding: 0.2rem 0.4rem;
 }
 
-.box:hover i {
-  opacity: 0;
-  z-index: -1;
+#close:active {
+  background: grey;
+  color: white;
+}
+.my{
+  background-color: #000;
+}
+
+
+/* lightbox */
+.blackOverlay {
+  display:none;
+  background:rgba(0,0,0,.6);
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+}
+
+.popup {
+  display: none;
+  color: white;
+  background-color: black;
+  position: fixed;
+  top: 24%;
+  left: 46%;
+  width: 51rem;
+  height: 48%;
+  margin-left: -300px;
+  z-index: 10;
+  border: 2px solid #000;
+}
+
+.closePopup {
+  float:right;
+  font-weight:bold;
+  color:red;
+  cursor:pointer;
+}
+.card {
+  display: flex;
+  /* border: 2px solid yellow; */
+  position: relative;
+  top: 18%;
+  width: 44rem;
+  left: 3.5rem;
+}
+
+
+.movie-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 2rem;
+}
+
+
+.movie-title h3 {
+  font-size: 2rem;
+  color: #c4b700;
+}
+.overview{
+  text-align: left;
+}
+.more-details{
+  display: flex;
 }

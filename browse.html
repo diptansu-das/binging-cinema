@@ -84,11 +84,13 @@
       </div>
 
       
-      <form name="search">
-        <input type="text" class="input" id="search-value" name="txt" >
-      </form>
-      <button type="submit" id="btn-search">Search</button>
+      <div id="search">
+        <form name="search">
+          <input type="text" class="input" id="search-value" name="txt" placeholder="Search here..." >
+        </form>
+        <button type="submit" id="btn-search">Search</button>
       </div>
+
     </div>
 
 
@@ -97,6 +99,38 @@
   <main id="main">
 
   </main>
+
+
+  <!-- light box  -->
+  
+  <div id="blackOverlay" class="blackOverlay" onclick="closePopup()"></div>
+  <div id="lightbox" >
+  <!-- <div id="popup" class="popup">
+        <div class="card" >
+            <div class="movie-poster">
+              <img src="./images/error.png" alt="">
+            </div>
+            <div class="movie-details">
+              <div class="movie-title">
+                <h3>Captain America Civil War</h3>
+              </div>
+              <div class="director-name">
+                  <span> Directed by</span><p>Anthony Russo, Joe Russo </p>
+              </div>
+              <div class="overview-wrap">
+                <p class="overview">Following the events of Age of Ultron, the collective governments of the world pass an act designed to regulate all superhuman activity. This polarizes opinion amongst the Avengers, causing two factions to side with Iron Man or Captain America, which causes an epic battle between former allies.</p>
+              </div>
+              <div class="more-details">
+                <h4 class="genre">Action, Superhero</h4>
+                <h4 class="release-date">6-5-16</h4>
+                <h4 class="genre">English</h4>
+              </div>
+            </div>
+          </div>
+      </div> -->
+  </div>
+
+  
 
 <!--pages from javascript -->
   <div class="pagination">
@@ -120,11 +154,26 @@
 
   </footer>
 
+  <section id="details-page">
+    <div id="card">
+        <button id="close">
+            <i class="fa fa-times"></i>
+        </button>
+        <div id="card-body">
+            <p id="card-name">Movie Name</p>
+            <img src="/avengers_poster.jpg" alt="" id="card-img">
+            <p id="card-title"><strong>Title : </strong><span id="title">Avengers</span></p>
+            <p id="card-rating"><strong>Rating : </strong><span id="rating">8.3</span></p>
+            <p id="card-language"><strong>Language : </strong><span id="language">English</span></p>
+            <p id="card-date"><strong>Release Date : </strong><span id="date">2014-04-12</span></p>
+            <p id="card-description"><strong>Description  : </strong><span id="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem soluta earum architecto esse atque alias eveniet optio illum! Atque commodi similique fugit! Molestiae, quam illo.</span></p>
+        </div>
+    </div>
+</section>
 
 
   <!-- Adds TV show background image to site -->
   <span class="bg"></span>
-
 
 
   <!-- JS scripts -->
