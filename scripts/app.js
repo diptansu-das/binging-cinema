@@ -4207,33 +4207,30 @@ window.onload = () => {
     let year = Math.floor(Math.random() * 20);
     let page = Math.floor(Math.random() * 50) + 1;
     if (year <= 9) {
-        const API_URl1 = `https://api.themoviedb.org/3/discover/movie/casts?with_genres=10749&primary_release_year=200${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
+        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=200${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
         changeTheDom(API_URl1)
     }
     else {
 
-        const API_URl1 = `https://api.themoviedb.org/3/discover/movie/casts?with_genres=10749&primary_release_year=20${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
+        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=20${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
         changeTheDom(API_URl1)
     }
 };
 
-let x={};
+let x = {};
 
 
 function changeTheDom(url1) {
     const main = document.getElementById('main')
     const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
-    
+
     getMovies(url1)
 
     async function getMovies(url) {
         const res = await fetch(url)
         const data = await res.json()
-        x=data.results
-        console.log(x);
+        x = data.results;
         showMovies(x);
-        // showMovies(data.results)
-
     }
 
     function getClassByrate(vote) {
@@ -4251,7 +4248,7 @@ function changeTheDom(url1) {
     function showMovies(movies) {
         main.innerHTML = ''
         movies.forEach((element, index) => {
-            const { title, poster_path, vote_average, overview} = element
+            const { title, poster_path, vote_average } = element
 
             const movieEl = document.createElement('div')
             movieEl.classList.add('movie')
@@ -4263,57 +4260,36 @@ function changeTheDom(url1) {
                     
           </div>`
 
-
-
-
-
             main.appendChild(movieEl)
 
-
-
-
-
-
-
         })
-
-
-
-
-
     }
-
 }
 
-
-
-
-
-
 function pop(index) {
+    const lightbox = document.getElementById('lightbox')
+    console.log(x[index]);
     const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
-    const lightbox=document.getElementById('lightbox')
     const Tool = document.createElement('div')
     lightbox.innerHTML = ''
     Tool.classList.add('popup')
+    // Tool.setAttribute("style", `background-image: url('${IMG_PATH + x[index].backdrop_path}')`);
     Tool.setAttribute("id", "popup");
     Tool.innerHTML = ` <div class="card" >
     <div class="movie-poster">
-      <img src="${IMG_PATH + x[index].poster_path}" height="233px">
+    <img src="${IMG_PATH + x[index].poster_path}" height="233px">
     </div>
     <div class="movie-details">
       <div class="movie-title">
         <h3>${x[index].title}</h3>
       </div>
-      <div class="director-name">
-          <span> Directed by</span><p>Anthony Russo, Joe Russo </p>
-      </div>
+      
       <div class="overview-wrap">
         <p class="overview">${x[index].overview}</p>
       </div>
       <div class="more-details">
-        <h4 class="genre">Action, Superhero</h4>
-        <h4 class="release-date">6-5-16</h4>
+        <h4 class="genre">${x[index].genre_ids}</h4>
+        <h4 class="release-date">${getDate(x[index].release_date)}</h4>
         <h4 class="genre">English</h4>
       </div>
     </div>
@@ -4321,17 +4297,32 @@ function pop(index) {
 
     lightbox.appendChild(Tool)
 
+    const backbox = document.getElementById('background')
+    backbox.setAttribute("style", `background-image: url('${IMG_PATH + x[index].backdrop_path}')`);
+
+
     document.getElementById('blackOverlay').style.display = 'block';
     document.getElementById('popup').style.display = 'block';
+    document.getElementById('background').style.display = 'block';
 
 
 }
+
+
+function getDate(date) {
+    const [year, month, day] = date.split('-');
+
+    const result = [day, month, year].join('/');
+    return result
+}
+
+
 
 function closePopup() {
 
     document.getElementById('blackOverlay').style.display = 'none';
     document.getElementById('popup').style.display = 'none';
-
+    document.getElementById('background').style.display = 'none';
 }
 
 

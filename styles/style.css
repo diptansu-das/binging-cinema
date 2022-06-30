@@ -2910,19 +2910,39 @@ select {
   z-index:1;
 }
 
+
+/* .light123{
+  background-color: white;
+  bottom:30%;
+} */
 .popup {
   display: none;
   color: white;
-  background-color: black;
+  /* background-color: rgba(0, 0, 0, 0.7); */
   position: fixed;
-  top: 24%;
-  left: 46%;
+  top: 18%;
+  left: 42%;
   width: 51rem;
-  height: 48%;
+  height: 29rem;
   margin-left: -300px;
-  z-index: 10;
-  border: 2px solid #000;
+  z-index: 100;
+  background-size:cover ;
+ 
+  
 }
+.showit{
+  display: none;
+  /* background-color: rgba(224, 22, 22, 0.7); */
+  top: 18%;
+  left: 42%;
+  width: 51rem;
+  height: 29rem;
+  position:fixed;
+  margin-left: -300px;
+  /* opacity: 0.9; */
+  background-size:cover ;
+}
+
 
 .closePopup {
   float:right;
@@ -2934,9 +2954,13 @@ select {
   display: flex;
   /* border: 2px solid yellow; */
   position: relative;
-  top: 18%;
-  width: 44rem;
-  left: 3.5rem;
+  top: 14%;
+  /* width: 44rem;
+  left: 4.5rem; */
+  width: 51rem;
+  height: 29rem;
+  bottom: 100px;
+  z-index: 100;
 }
 
 
@@ -2946,9 +2970,12 @@ select {
   align-items: flex-start;
   margin-left: 2rem;
 }
-
-
+.movie-poster img{
+  width: 14rem;
+  height: 21rem;
+}
 .movie-title h3 {
+  text-align: left;
   font-size: 2rem;
   color: #c4b700;
 }
