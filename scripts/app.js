@@ -4303,13 +4303,17 @@ function pop(index) {
       
       <div class="overview-wrap">
         <p class="overview">${x[index].overview}</p>
+        <br>
       </div>
       <div class="more-details">
         <h4 class="genre">${getGenre(x[index].genre_ids)}</h4>
         <h4 class="release-date"> Release Date -${getDate(x[index].release_date)}</h4>
         <h4 class="genre">Language -English</h4>
-        <h4>Binging Cinema Rating</h4>
-        <img src= "${getStar(x[index].vote_average)}" >
+       <br>
+      </div>
+      <div class="binging-rating">
+      <h4>Binging Cinema Rating</h4>
+     <img src= "${getStar(x[index].vote_average)}" >
       </div>
     </div>
   </div>`;
@@ -4336,6 +4340,12 @@ function getGenre(genre) {
     });
     return text1
 }
+
+
+// function getCast(id)
+// {
+//     const API_URl1 =` https://api.themoviedb.org/3/movie/${id}?api_key=594c8f852d2f55546b5698acac88ae46&append_to_response=credits`
+// }
 
 function Return(value) {
 
@@ -4411,27 +4421,27 @@ function getDate(date) {
 function getStar(vote) {
 
     if (vote == 10)
-        return 'https://i.postimg.cc/zfKTLL4V/Material-10.png'
+        return 'https://i.postimg.cc/WbHSJjsy/Material-10.png'
     else if (vote > 8 && vote < 10)
-        return 'https://i.postimg.cc/DZF1gkRQ/Material.png'
+        return 'https://i.postimg.cc/KvPqwCbp/Material-8-5.png'
     else if (vote == 8)
-        return 'https://i.postimg.cc/MprqKRM8/Material-8.png'
+        return 'https://i.postimg.cc/PrT9XdSn/Material-8.png'
     else if (vote > 6 && vote < 8)
-        return 'https://i.postimg.cc/rs9YWVYL/Material-6-5.png'
+        return 'https://i.postimg.cc/dV4BKy0g/Material-6-5.png'
     else if (vote == 6)
-        return 'https://i.postimg.cc/NfZZJwnR/Material-6.png'
+        return 'https://i.postimg.cc/65LrKv3t/Material-6.png'
     else if (vote > 4 && vote < 6)
-        return 'https://i.postimg.cc/kX19cZNm/Material-2-5.png'
+        return 'https://i.postimg.cc/ncjLY8y5/Material-4-5.png'
     else if (vote == 4)
-        return 'https://i.postimg.cc/GtSXVkhX/Material-2.png'
+        return 'https://i.postimg.cc/vmqrxwFB/Material-4.png'
     else if (vote > 2 && vote < 4)
-        return 'https://i.postimg.cc/gkL05mgD/Material-1-5.png'
+        return 'https://i.postimg.cc/SRyYgZp5/Material-2-5.png'
     else if (vote == 2)
-        return 'https://i.postimg.cc/k5BQjwjZ/Material.png'
+        return 'https://i.postimg.cc/y8Fgz4Y5/Material-2.png'
     else if (vote > 0 && vote < 2)
-        return 'https://i.postimg.cc/FHXXFL4Y/Material-0-5.png'
+        return 'https://i.postimg.cc/fW9B9MNy/Material-1-5.png'
     else
-        return 'https://i.postimg.cc/KjjYmgtK/Material-0.png'
+        return 'https://i.postimg.cc/8CbVDLy8/Material-0.png'
 
 }
 
