@@ -4027,7 +4027,7 @@ Genre_Map.set('Family', 10751);
 Genre_Map.set('Fantasy', 14);
 Genre_Map.set('History', 36);
 Genre_Map.set('Horror', 27);
-Genre_Map.set('Music  ', 10402);
+Genre_Map.set('Music', 10402);
 Genre_Map.set('Mystery', 9648);
 Genre_Map.set('Romance', 10749);
 Genre_Map.set('Science Fiction', 878);
@@ -4200,7 +4200,12 @@ document.querySelector("#btn-search").addEventListener("click", () => {
     changeTheDom(API_URl);
 });
 
-
+document.getElementById('search-value').addEventListener("input", function () {
+    let search = document.getElementById('search-value').value;
+    let page_number = parseInt($('#val01').text());
+    const API_URl = `https://api.themoviedb.org/3/search/movie?api_key=594c8f852d2f55546b5698acac88ae46&query=${search}&page=${page_number}`;
+    changeTheDom(API_URl);
+})
 
 
 window.onload = () => {
@@ -4265,15 +4270,27 @@ function changeTheDom(url1) {
         })
     }
 }
+window.onload = () => {
+    let year = Math.floor(Math.random() * 20);
+    let page = Math.floor(Math.random() * 50) + 1;
+    if (year <= 9) {
+        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=200${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
+        changeTheDom(API_URl1)
+    }
+    else {
+
+        const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=20${year}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page}`
+        changeTheDom(API_URl1)
+    }
+};
+
 
 function pop(index) {
     const lightbox = document.getElementById('lightbox')
-    console.log(x[index]);
     const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
     const Tool = document.createElement('div')
     lightbox.innerHTML = ''
     Tool.classList.add('popup')
-    // Tool.setAttribute("style", `background-image: url('${IMG_PATH + x[index].backdrop_path}')`);
     Tool.setAttribute("id", "popup");
     Tool.innerHTML = ` <div class="card" >
     <div class="movie-poster">
@@ -4288,9 +4305,11 @@ function pop(index) {
         <p class="overview">${x[index].overview}</p>
       </div>
       <div class="more-details">
-        <h4 class="genre">${x[index].genre_ids}</h4>
-        <h4 class="release-date">${getDate(x[index].release_date)}</h4>
-        <h4 class="genre">English</h4>
+        <h4 class="genre">${getGenre(x[index].genre_ids)}</h4>
+        <h4 class="release-date"> Release Date -${getDate(x[index].release_date)}</h4>
+        <h4 class="genre">Language -English</h4>
+        <h4>Binging Cinema Rating</h4>
+        <img src= "${getStar(x[index].vote_average)}" >
       </div>
     </div>
   </div>`;
@@ -4298,13 +4317,86 @@ function pop(index) {
     lightbox.appendChild(Tool)
 
     const backbox = document.getElementById('background')
-    backbox.setAttribute("style", `background-image: url('${IMG_PATH + x[index].backdrop_path}')`);
+    backbox.setAttribute("style", `background-image: url('${IMG_PATH + x[index].backdrop_path}'),url('images/load.png')`);
 
 
     document.getElementById('blackOverlay').style.display = 'block';
     document.getElementById('popup').style.display = 'block';
     document.getElementById('background').style.display = 'block';
 
+
+}
+function getGenre(genre) {
+    let text1 = "Genre - ";
+
+    genre.forEach(function (value) {
+
+        let G = Return(value)
+        text1 = text1 + G + "/"
+    });
+    return text1
+}
+
+function Return(value) {
+
+    if (value == 10759)
+        return 'Action & Adventure'
+    else if (value == 16)
+        return 'Animation'
+    else if (value == 35)
+        return 'Comedy'
+    else if (value == 80)
+        return 'Crime'
+    else if (value == 99)
+        return 'Documentary'
+    else if (value == 18)
+        return 'Drama'
+    else if (value == 10751)
+        return 'Family'
+    else if (value == 10762)
+        return 'Kids'
+    else if (value == 9648)
+        return 'Mystery'
+    else if (value == 10763)
+        return 'News'
+    else if (value == 10764)
+        return 'Reality'
+    else if (value == 10765)
+        return 'Sci-Fi & Fantasy'
+    else if (value == 10766)
+        return 'Soap'
+    else if (value == 10767)
+        return 'Talk'
+    else if (value == 10768)
+        return 'War & Politics'
+    else if (value == 37)
+        return 'Western'
+    else if (value == 28)
+        return 'Action'
+    else if (value == 12)
+        return 'Adventure'
+    else if (value == 14)
+        return 'Fantasy'
+    else if (value == 36)
+        return 'History'
+    else if (value == 27)
+        return 'Horror'
+    else if (value == 10402)
+        return 'Music'
+    else if (value == 9648)
+        return 'Mystery'
+    else if (value == 10749)
+        return 'Romance'
+    else if (value == 878)
+        return 'Science Fiction'
+    else if (value == 10770)
+        return 'TV Movie'
+    else if (value == 53)
+        return 'Thriller'
+    else if (value == 10752)
+        return 'War'
+    else
+        return ' '
 
 }
 
@@ -4314,6 +4406,33 @@ function getDate(date) {
 
     const result = [day, month, year].join('/');
     return result
+}
+
+function getStar(vote) {
+
+    if (vote == 10)
+        return 'https://i.postimg.cc/zfKTLL4V/Material-10.png'
+    else if (vote > 8 && vote < 10)
+        return 'https://i.postimg.cc/DZF1gkRQ/Material.png'
+    else if (vote == 8)
+        return 'https://i.postimg.cc/MprqKRM8/Material-8.png'
+    else if (vote > 6 && vote < 8)
+        return 'https://i.postimg.cc/rs9YWVYL/Material-6-5.png'
+    else if (vote == 6)
+        return 'https://i.postimg.cc/NfZZJwnR/Material-6.png'
+    else if (vote > 4 && vote < 6)
+        return 'https://i.postimg.cc/kX19cZNm/Material-2-5.png'
+    else if (vote == 4)
+        return 'https://i.postimg.cc/GtSXVkhX/Material-2.png'
+    else if (vote > 2 && vote < 4)
+        return 'https://i.postimg.cc/gkL05mgD/Material-1-5.png'
+    else if (vote == 2)
+        return 'https://i.postimg.cc/k5BQjwjZ/Material.png'
+    else if (vote > 0 && vote < 2)
+        return 'https://i.postimg.cc/FHXXFL4Y/Material-0-5.png'
+    else
+        return 'https://i.postimg.cc/KjjYmgtK/Material-0.png'
+
 }
 
 

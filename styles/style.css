@@ -2841,7 +2841,7 @@ select {
 }
 
 .card-body {
-  
+
   width: 40rem;
   height: 27rem;
   padding: 0 4.4rem;
@@ -2893,28 +2893,24 @@ select {
   background: grey;
   color: white;
 }
-.my{
+
+.my {
   background-color: #000;
 }
 
 
 /* lightbox */
 .blackOverlay {
-  display:none;
-  background:rgba(0,0,0,.6);
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:1;
+  display: none;
+  background: rgba(0, 0, 0, .6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
-
-/* .light123{
-  background-color: white;
-  bottom:30%;
-} */
 .popup {
   display: none;
   color: white;
@@ -2926,41 +2922,43 @@ select {
   height: 29rem;
   margin-left: -300px;
   z-index: 100;
-  background-size:cover ;
- 
-  
+  background-size: cover;
+
+
 }
-.showit{
+
+.showit {
   display: none;
   /* background-color: rgba(224, 22, 22, 0.7); */
   top: 18%;
   left: 42%;
   width: 51rem;
-  height: 29rem;
-  position:fixed;
+  height: 28rem;
+  position: fixed;
   margin-left: -300px;
   /* opacity: 0.9; */
-  background-size:cover ;
+  background-size: cover;
 }
 
 
 .closePopup {
-  float:right;
-  font-weight:bold;
-  color:red;
-  cursor:pointer;
+  float: right;
+  font-weight: bold;
+  color: red;
+  cursor: pointer;
 }
+
 .card {
   display: flex;
   /* border: 2px solid yellow; */
   position: relative;
-  top: 14%;
-  /* width: 44rem;
-  left: 4.5rem; */
-  width: 51rem;
-  height: 29rem;
-  bottom: 100px;
+  top: 1.5rem;
+  width: 44rem;
+  /* height: 29rem; */
+  left: 1.5rem;
+  bottom: 0;
   z-index: 100;
+  margin: 2rem;
 }
 
 
@@ -2970,18 +2968,43 @@ select {
   align-items: flex-start;
   margin-left: 2rem;
 }
-.movie-poster img{
+
+.movie-poster img {
   width: 14rem;
   height: 21rem;
 }
+
+.movie-title {
+  margin-top: 1.5rem;
+}
+
 .movie-title h3 {
   text-align: left;
   font-size: 2rem;
   color: #c4b700;
 }
-.overview{
+
+.overview {
   text-align: left;
+  width: 27rem;
 }
-.more-details{
+
+.overview {
+  text-align: left;
+  width: 27rem;
+}
+
+.more-details {
   display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  /* align-content: stretch; */
+  /* justify-content: space-evenly; */
+  align-items: flex-start;
+}
+
+.more-details img {
+  height: 400px;
+  position: absolute;
+  /* bottom: 164px; */
 }
