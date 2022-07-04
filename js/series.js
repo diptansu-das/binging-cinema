@@ -7,7 +7,7 @@ let menu = document.querySelector('#menu-bar');
 let navbar = document.querySelector('.navbar');
 let videoBtn = document.querySelectorAll('.vid-btn');
 
-window.onscroll = () =>{
+window.onscroll = () => {
     searchBtn.classList.remove('fa-times');
     searchBar.classList.remove('active');
     menu.classList.remove('fa-times');
@@ -15,26 +15,26 @@ window.onscroll = () =>{
     loginForm.classList.remove('active');
 }
 
-menu.addEventListener('click', () =>{
+menu.addEventListener('click', () => {
     menu.classList.toggle('fa-times');
     navbar.classList.toggle('active');
 });
 
-searchBtn.addEventListener('click', () =>{
+searchBtn.addEventListener('click', () => {
     searchBtn.classList.toggle('fa-times');
     searchBar.classList.toggle('active');
 });
 
-formBtn.addEventListener('click', () =>{
+formBtn.addEventListener('click', () => {
     loginForm.classList.add('active');
 });
 
-formClose.addEventListener('click', () =>{
+formClose.addEventListener('click', () => {
     loginForm.classList.remove('active');
 });
 
-videoBtn.forEach(btn =>{
-    btn.addEventListener('click', ()=>{
+videoBtn.forEach(btn => {
+    btn.addEventListener('click', () => {
         document.querySelector('.controls .active').classList.remove('active');
         btn.classList.add('active');
         let src = btn.getAttribute('data-src');
@@ -44,49 +44,49 @@ videoBtn.forEach(btn =>{
 
 var swiper = new Swiper(".review-slider", {
     spaceBetween: 20,
-    loop:true,
+    loop: true,
     autoplay: {
         delay: 2500,
         disableOnInteraction: false,
     },
     breakpoints: {
         640: {
-          slidesPerView: 1,
+            slidesPerView: 1,
         },
         768: {
-          slidesPerView: 2,
+            slidesPerView: 2,
         },
         1024: {
-          slidesPerView: 3,
+            slidesPerView: 3,
         },
     },
 });
 
 var swiper = new Swiper(".brand-slider", {
     spaceBetween: 20,
-    loop:true,
+    loop: true,
     autoplay: {
         delay: 2500,
         disableOnInteraction: false,
     },
     breakpoints: {
         450: {
-          slidesPerView: 2,
+            slidesPerView: 2,
         },
         768: {
-          slidesPerView: 3,
+            slidesPerView: 3,
         },
         991: {
-          slidesPerView: 4,
+            slidesPerView: 4,
         },
         1200: {
-          slidesPerView: 5,
+            slidesPerView: 5,
         },
-      },
+    },
 });
 
 // document.querySelector("MovieBtn").addEventListener("click", () => {
-    
+
 
 //     const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=2022&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
 //     changeTheDom(API_URl1);
@@ -115,34 +115,34 @@ window.onload = () => {
 let x = {};
 
 function changeTheDom(url1) {
-const main = document.getElementById('main')
-const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
-// const url1 = `https://api.themoviedb.org/3/discover/tv?with_genres=10749&primary_release_year=20012&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
-getMovies(url1)
+    const main = document.getElementById('main')
+    const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
+    // const url1 = `https://api.themoviedb.org/3/discover/tv?with_genres=10749&primary_release_year=20012&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
+    getMovies(url1)
 
-async function getMovies(url) {
-    const res = await fetch(url)
-    const data = await res.json()
-    x = data.results;
-    showMovies(x);
-}
+    async function getMovies(url) {
+        const res = await fetch(url)
+        const data = await res.json()
+        x = data.results;
+        showMovies(x);
+    }
 
-function getClassByrate(vote) {
-    if (vote >= 8) {
-        return 'green'
+    function getClassByrate(vote) {
+        if (vote >= 8) {
+            return 'green'
+        }
+        else if (vote >= 5) {
+            return 'orange'
+        }
+        else {
+            return 'red'
+        }
     }
-    else if (vote >= 5) {
-        return 'orange'
-    }
-    else {
-        return 'red'
-    }
-}
 
-function showMovies(movies) {
+    function showMovies(movies) {
         main.innerHTML = ''
         movies.forEach((element, index) => {
-            const {name, poster_path, vote_average } = element
+            const { name, poster_path, vote_average } = element
 
             const movieEl = document.createElement('div')
             movieEl.classList.add('movie')
@@ -151,7 +151,9 @@ function showMovies(movies) {
             <div class="movie-info">
                 <h3>${name}</h3>
                 <span class="${getClassByrate(vote_average)}">${vote_average}</span>
-                    
+                <!-- favorite button -->
+                <button class="favourite-movie" onclick="addFavoriteItem(${index})"
+                >+</button>   
           </div>`
 
             main.appendChild(movieEl)
@@ -335,3 +337,17 @@ function closePopup() {
 
 
 
+function addFavoriteItem(index) {
+    const list = JSON.parse(localStorage.getItem('favoriteMovies')) || []
+    const movie = x.find(item => item.id === Number(x[index].id))
+    // console.log(list)
+    console.log(movie)
+    if (list.some(item => item.id === Number(x[index].id))) {
+        alert(`${movie.title} is already in your favorite list.`)
+    } else {
+        list.push(movie)
+        //   alert(`Added ${movie.title} to your favorite list!`)
+    }
+    localStorage.setItem('favoriteMovies', JSON.stringify(list))
+
+}

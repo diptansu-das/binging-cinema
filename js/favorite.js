@@ -1,3 +1,93 @@
+let searchBtn = document.querySelector('#search-btn');
+let searchBar = document.querySelector('.search-bar-container');
+let formBtn = document.querySelector('#login-btn');
+let loginForm = document.querySelector('.login-form-container');
+let formClose = document.querySelector('#form-close');
+let menu = document.querySelector('#menu-bar');
+let navbar = document.querySelector('.navbar');
+let videoBtn = document.querySelectorAll('.vid-btn');
+
+window.onscroll = () => {
+    searchBtn.classList.remove('fa-times');
+    searchBar.classList.remove('active');
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+    loginForm.classList.remove('active');
+}
+
+menu.addEventListener('click', () => {
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('active');
+});
+
+searchBtn.addEventListener('click', () => {
+    searchBtn.classList.toggle('fa-times');
+    searchBar.classList.toggle('active');
+});
+
+formBtn.addEventListener('click', () => {
+    loginForm.classList.add('active');
+});
+
+formClose.addEventListener('click', () => {
+    loginForm.classList.remove('active');
+});
+
+videoBtn.forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelector('.controls .active').classList.remove('active');
+        btn.classList.add('active');
+        let src = btn.getAttribute('data-src');
+        document.querySelector('#video-slider').src = src;
+    });
+});
+
+var swiper = new Swiper(".review-slider", {
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+    breakpoints: {
+        640: {
+            slidesPerView: 1,
+        },
+        768: {
+            slidesPerView: 2,
+        },
+        1024: {
+            slidesPerView: 3,
+        },
+    },
+});
+
+var swiper = new Swiper(".brand-slider", {
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+    breakpoints: {
+        450: {
+            slidesPerView: 2,
+        },
+        768: {
+            slidesPerView: 3,
+        },
+        991: {
+            slidesPerView: 4,
+        },
+        1200: {
+            slidesPerView: 5,
+        },
+    },
+});
+
+
+
+
 const mainFavorite=document.querySelector("#main-favourite")
  const moive =JSON.parse(localStorage.getItem('favoriteMovies')) || []
  const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
@@ -17,14 +107,14 @@ const mainFavorite=document.querySelector("#main-favourite")
     function showMovies(movies) {
         mainFavorite.innerHTML = ''
         movies.forEach((element, index) => {
-            const { title, poster_path, vote_average } = element
+            const { name,title, poster_path, vote_average } = element
 
             const movieEl = document.createElement('div')
             movieEl.classList.add('movie')
             movieEl.innerHTML = `
        <img src="${IMG_PATH + poster_path}" alt="${title}" onerror="this.src='images/error.png'"  onclick="pop(${index})" >
         <div class="movie-info">
-            <h3>${title}</h3>
+            <h3>${title || name}</h3>
             <span class="${getClassByrate(vote_average)}">${vote_average}</span>
             <!-- favorite button -->
             <button class="favourite-movie" onclick=" deleteNote(${index})"
@@ -53,7 +143,7 @@ function pop(index) {
     <div class="movie-details">
       <div class="movie-title">
         
-        <h3>${moive[index].title}</h3>
+        <h3>${moive[index].title || moive[index].name}</h3>
       </div>
       
       <div class="overview-wrap">
@@ -62,7 +152,7 @@ function pop(index) {
       </div>
       <div class="more-details">
         <h4 class="genre">${getGenre(moive[index].genre_ids)}</h4>
-        <h4 class="release-date"> Release Date -${getDate(moive[index].release_date)}</h4>
+        <h4 class="release-date"> Release Date -${getDate(moive[index].release_date || moive[index].first_air_date )}</h4>
         <h4 class="genre">Language -English</h4>
        <br>
       </div>
