@@ -1,107 +1,137 @@
-<!doctype html>
-<html lang="en-gb">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Binging Cinema</title>
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
-  <meta name="author" content="https://plus.google.com/116801469202683881648/" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Binging Cinema </title>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
-  <meta property="fb:app_id" content="292523134239015" />
-  <meta property="og:type" content="article" />
-  <meta name="viewport" content="width=device-width" />
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-  <link rel="stylesheet" type="text/css" href="styles/style.css" />
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-  <!-- Title Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100;400&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
-  <style>
-    .social {
-      font-size: .75rem;
-      position: fixed;
-      margin-right: 1em;
-      bottom: 0px;
-      /* padding: 20px; */
-      margin: 20px 46px;
-    }
-  </style>
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
-
 <body>
+    
+<!-- header section starts  -->
 
-  <div class="logo">
-    <h1 class="logo-text">Binging Cinema</h1>
-  </div>
+<header>
 
-  <div class="front">
-    <h1>Cinema is a matter of what's
-      in the frame what's out</h1>
-    <h3>Martin Scorsese</h3>
-    <button><a href="browse.html">Explore Cinema</a> </button>
-  </div>
+    <div id="menu-bar" class="fas fa-bars"></div>
 
-  <!-- Hamberger Menu Code-->
-  <div class="about">
-    <a href="#" class="about__icon btn js-show-modal " style="color:#efff16">
-      <i class="fa fa-bars nav-icon " aria-hidden="true"></i>
-    </a>
+    <a href="#" class="logo"><span>Binging Cinema</a>
 
-    <div class="about__content  hide">
-      <a href="#" tabindex="-1" class="about__icon visuallyhidden js-hide-modal">
-        <i class="fa fa-times nav-icon" aria-hidden="true"></i>
-      </a>
-
-      <div class="about__content__inner">
         <nav class="navbar">
-          <a href="index.html">Home</a>
-          <a href="form.html">TimeLine</a>
-          <a href="browse.html">WatchList</a>
+            <a href="index.html">home</a>
+            <a href="movie.html" >Movies</a>
+            <a href="series.html">Series</a>
+            <a href="checkTime.html">TimeWasted</a>
+            <a href="favourite.html" onclick="displayDataList()">WatchList</a>
         </nav>
 
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-  <!-- 126.42 -->
-  <!-- Social Media Icons   -->
-  <!-- used form -https://codepen.io/JacobLett/pen/NxYOoO -->
-  <footer class="footer">
-    <div class="social">
-
-      <a href="https://www.facebook.com/bingingcinema" id="share-fb" class="sharer button"><i class="fab fa-3x fa-facebook-square social-icon"></i></a>
-      <a href="https://www.instagram.com/binging__cinema/" id="share-in" class="sharer button"><i
-          class="fab fa-3x fa-instagram social-icon"></i></a>
-      <a href="https://www.twitter.com/binging__cinema/" id="share-tw" class="sharer button"><i
-          class="fab fa-3x fa-twitter-square social-icon"></i></a>
-      <a href="https://interviewerpr.com/binging-cinema-is-sagar-acharys-initiative-to-deliver-quality-content-to-the-masses/"
-        id="share-em" class="sharer button"><i class="fas fa-3x fa-envelope-square social-icon"></i></a>
+    <div class="icons">
+        <i class="fas fa-search" id="search-btn"></i>
+        <i class="fas fa-user" id="login-btn"></i>
     </div>
 
-  </footer>
+    <form action="" class="search-bar-container">
+        <input type="search" id="search-bar" placeholder="search here...">
+        <label for="search-bar" class="fas fa-search"></label>
+    </form>
 
-  <!-- Adds TV show background image to site -->
-  <span class="bg"></span>
+</header>
 
 
 
-  <!-- JS scripts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <script src="scripts/app.js"></script>
-  <script src="https://cdn.jsdelivr.net/sharer.js/latest/sharer.min.js"></script>
+<div class="login-form-container">
+
+    <i class="fas fa-times" id="form-close"></i>
+
+    <form action="">
+        <h3>login</h3>
+        <input type="email" class="box" placeholder="enter your email">
+        <input type="password" class="box" placeholder="enter your password">
+        <input type="submit" value="login now" class="btn">
+        <input type="checkbox" id="remember">
+        <label for="remember">remember me</label>
+        <p>forget password? <a href="#">click here</a></p>
+        <p>don't have and account? <a href="#">register now</a></p>
+    </form>
+
+</div>
+
+
+
+<section class="home" id="home">
+
+    <div class="content">
+        <h3>CINEMA IS A MATTER OF WHAT'S IN THE FRAME WHAT'S OUT</h3>
+        <p>Martin Scorsese</p>
+        <a href="#" class="btn">Explore Now</a>
+    </div>
+
+    <div class="controls">
+        <span class="vid-btn active" data-src="images/vid-1.mp4"></span>
+        <span class="vid-btn" data-src="images/vid-2.mp4"></span>
+        <span class="vid-btn" data-src="images/vid-3.mp4"></span>
+        <span class="vid-btn" data-src="images/vid-4.mp4"></span>
+        <span class="vid-btn" data-src="images/vid-5.mp4"></span>
+    </div>
+
+    <div class="video-container">
+        <video src="images/vid-1.mp4" id="video-slider" loop autoplay muted></video>
+    </div>
+
+</section>
+
+
+<section>
+
+
+
+</section>
+
+
+<!-- footer section  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>about us</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda quas magni pariatur est accusantium voluptas enim nemo facilis sit debitis.</p>
+        </div>
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="index.html">home</a>
+            <a href="movie.html">Movies</a>
+            <a href="series.html">Series</a>
+        </div>
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#">facebook</a>
+            <a href="#">instagram</a>
+            <a href="#">twitter</a>
+            <a href="#">linkedin</a>
+        </div>
+
+    </div>
+
+   
+
+</section>
+
+
+
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
 </body>
-
 </html>
