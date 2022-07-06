@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,132 +13,173 @@
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
+    <style type="text/css">
+        .cover-container {
+            height: 350px;
+            width: 100%;
+            white-space: nowrap;
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
 
+        .cover-item {
+            position: relative;
+            display: inline-block;
+            margin: 8px 8px;
+            box-shadow: 2px 2px 4px #bbb;
+            border-top-right-radius: 4px;
+            width: 200px;
+            height: 300px;
+            vertical-align: bottom;
+            background-position: top left;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .cover-container::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .cover-container::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover-container::-webkit-scrollbar-thumb {
+            background-color: darkgrey;
+            outline: 1px solid slategrey;
+        }
+    </style>
 </head>
+
 <body>
-    
-<!-- header section starts  -->
 
-<header>
+    <!-- header section starts  -->
 
-    <div id="menu-bar" class="fas fa-bars"></div>
+    <header>
 
-    <a href="#" class="logo"><span>Binging Cinema</a>
+        <div id="menu-bar" class="fas fa-bars"></div>
+
+        <a href="#" class="logo"><span>Binging Cinema</a>
 
         <nav class="navbar">
-            <a href="index.html">home</a>
-            <a href="movie.html" >Movies</a>
+            <a class="makeActive" href="index.html">home</a>
+            <a href="movie.html">Movies</a>
             <a href="series.html">Series</a>
             <a href="checkTime.html">TimeWasted</a>
             <a href="favourite.html" onclick="displayDataList()">WatchList</a>
         </nav>
 
-    <div class="icons">
-        <i class="fas fa-search" id="search-btn"></i>
-        <i class="fas fa-user" id="login-btn"></i>
+        <div class="icons">
+            <i class="fas fa-search" id="search-btn"></i>
+            <i class="fas fa-user" id="login-btn"></i>
+        </div>
+
+        <form action="" class="search-bar-container">
+            <input type="search" id="search-bar" placeholder="search here...">
+            <label for="search-bar" class="fas fa-search"></label>
+        </form>
+
+    </header>
+
+
+
+    <div class="login-form-container">
+
+        <i class="fas fa-times" id="form-close"></i>
+
+        <form action="">
+            <h3>login</h3>
+            <input type="email" class="box" placeholder="enter your email">
+            <input type="password" class="box" placeholder="enter your password">
+            <input type="submit" value="login now" class="btn">
+            <input type="checkbox" id="remember">
+            <label for="remember">remember me</label>
+            <p>forget password? <a href="#">click here</a></p>
+            <p>don't have and account? <a href="#">register now</a></p>
+        </form>
+
     </div>
 
-    <form action="" class="search-bar-container">
-        <input type="search" id="search-bar" placeholder="search here...">
-        <label for="search-bar" class="fas fa-search"></label>
-    </form>
-
-</header>
 
 
+    <section class="home" id="home">
 
-<div class="login-form-container">
+        <div class="content">
+            <h3>CINEMA IS A MATTER OF WHAT'S IN THE FRAME WHAT'S OUT</h3>
+            <p>Martin Scorsese</p>
+            <a href="#" class="btn">Explore Now</a>
+        </div>
 
-    <i class="fas fa-times" id="form-close"></i>
-
-    <form action="">
-        <h3>login</h3>
-        <input type="email" class="box" placeholder="enter your email">
-        <input type="password" class="box" placeholder="enter your password">
-        <input type="submit" value="login now" class="btn">
-        <input type="checkbox" id="remember">
-        <label for="remember">remember me</label>
-        <p>forget password? <a href="#">click here</a></p>
-        <p>don't have and account? <a href="#">register now</a></p>
-    </form>
-
-</div>
-
-
-
-<section class="home" id="home">
-
-    <div class="content">
-        <h3>CINEMA IS A MATTER OF WHAT'S IN THE FRAME WHAT'S OUT</h3>
-        <p>Martin Scorsese</p>
-        <a href="#" class="btn">Explore Now</a>
-    </div>
-
-    <div class="controls">
+        <!-- <div class="controls">
         <span class="vid-btn active" data-src="https://vimeo.com/726798962"></span>
         <span class="vid-btn" data-src="images/vid-2.mp4"></span>
         <span class="vid-btn" data-src="images/vid-3.mp4"></span>
         <span class="vid-btn" data-src="images/vid-4.mp4"></span>
         <span class="vid-btn" data-src="images/vid-5.mp4"></span>
-    </div>
-    <!-- <div class="controls">
-        <span class="vid-btn active" src="https://wallpaperaccess.com/full/6366.jpg"></span>
-        <span class="vid-btn" src="https://images2.alphacoders.com/724/724132.jpg"></span>
-        <span class="vid-btn" src="https://www.techbuzzonline.com/wp-content/uploads/2018/06/19-Doctor-Strange-Marvel-Comic-HD-Wallpaper.jpg"></span>
     </div> -->
-
-    <div class="video-container">
-        <video src="https://vimeo.com/726798962" id="video-slider" loop autoplay muted></video>
-        <!-- <img src="https://wallpaperaccess.com/full/6366.jpg" id="video-slider">
-    </div> -->
-
-</section>
-
-
-<section>
-
-
-
-</section>
-
-
-<!-- footer section  -->
-
-<section class="footer">
-
-    <div class="box-container">
-
-        <div class="box">
-            <h3>about us</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda quas magni pariatur est accusantium voluptas enim nemo facilis sit debitis.</p>
-        </div>
-        <div class="box">
-            <h3>quick links</h3>
-            <a href="index.html">home</a>
-            <a href="movie.html">Movies</a>
-            <a href="series.html">Series</a>
-        </div>
-        <div class="box">
-            <h3>follow us</h3>
-            <a href="#">facebook</a>
-            <a href="#">instagram</a>
-            <a href="#">twitter</a>
-            <a href="#">linkedin</a>
+        <div class="controls">
+            <span class="vid-btn active" src="https://wallpaperaccess.com/full/6366.jpg"></span>
+            <span class="vid-btn" src="https://images2.alphacoders.com/724/724132.jpg"></span>
+            <span class="vid-btn"
+                src="https://w0.peakpx.com/wallpaper/510/951/HD-wallpaper-batman-the-batman-dc-comics-the-batman-movie.jpg"></span>
         </div>
 
-    </div>
+        <div class="video-container">
+            <!-- <video src="https://vimeo.com/726798962" id="video-slider" loop autoplay muted></video> -->
+            <img src="https://wallpaperaccess.com/full/6366.jpg" id="video-slider">
+        </div>
 
-   
-
-</section>
+    </section>
 
 
+    <section>
+        <div id="row-fluid">
+            <div class="cover-container" id="main">  
+            </div>
+        </div>
+    </section>
 
 
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- footer section  -->
 
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>about us</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda quas magni pariatur est
+                    accusantium voluptas enim nemo facilis sit debitis.</p>
+            </div>
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="index.html">home</a>
+                <a href="movie.html">Movies</a>
+                <a href="series.html">Series</a>
+            </div>
+            <div class="box">
+                <h3>follow us</h3>
+                <a href="#">facebook</a>
+                <a href="#">instagram</a>
+                <a href="#">twitter</a>
+                <a href="#">linkedin</a>
+            </div>
+
+        </div>
+
+
+
+    </section>
+
+
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="js/index.js"></script>
 
 </body>
+
 </html>
