@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Binging Cinema </title>
-        <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    
-        <!-- font awesome cdn link  -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
-        <!-- custom css file link  -->
-        <link rel="stylesheet" href="css/style.css">
-    
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Binging Cinema </title>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
 
 <body>
 
@@ -26,14 +26,14 @@
 
         <a href="#" class="logo"><span>Binging Cinema</a>
 
-            <nav class="navbar">
-                <a href="index.html">home</a>
-                <a class="makeActive" href="movie.html" >Movies</a>
-                <a href="series.html">Series</a>
-                <a href="checkTime.html">TimeWasted</a>
-                <a href="favourite.html" onclick="displayDataList()">WatchList</a>
-            </nav>
-            <!-- <div class="favourites">
+        <nav class="navbar">
+            <a href="index.html">home</a>
+            <a class="makeActive" href="movie.html">Movies</a>
+            <a href="series.html">Series</a>
+            <a href="checkTime.html">TimeWasted</a>
+            <a href="favourite.html" onclick="displayDataList()">WatchList</a>
+        </nav>
+        <!-- <div class="favourites">
                 <button class="favourite-btn"> <a href="favourite.html">Favourite</a> </button>
             </div> -->
 
@@ -72,7 +72,7 @@
     <main id="main">
 
     </main>
-    <!-- filter bar -->
+
 
     <!-- light box  -->
 
@@ -83,8 +83,44 @@
     <div id="background" class="showit">
 
     </div>
+    <!-- light box   ends -->
+    
+    <!-- filter bar -->
+    <div class="filter-bar">
+        <!-- <h1>Browse By</h1> -->
+        <div class="filter-dropdowns">
+            <select>
+                <option>Browse By</option>
+            </select>
+            <select name="genre" id='genre-dropdown' class="genre">
+                <option>All genres</option>
+            </select>
 
+            <select name="year" id='date-dropdown' class="year">
+                <option>Years</option>
+            </select>
+            <select name="sort" id='sort-dropdown' class="sort">
+                <option>Sort</option>
+                <option>A-Z</option>
+                <option>Z-A</option>
+            </select>
+            <select name="sort" id='sort-dropdown' class="sort">
+                <option>Rating </option>
+                <option>1</option>
+                <option>2</option>
+            </select>
 
+        </div>
+
+        <div id="searchFilter">
+            <form name="search">
+                <input type="text" class="input" id="search-value" name="txt" placeholder="Search here...">
+            </form>
+            <button type="submit" id="btn-search">Search</button>
+        </div>
+
+    </div>
+    <!-- filter bar ends -->
 
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
