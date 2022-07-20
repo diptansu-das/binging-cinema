@@ -49,12 +49,16 @@ videoBtn.forEach(btn => {
 
 window.onload = () => {
 
-    const API_URl1 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=2020&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
-    changeTheDom(API_URl1)
+    // const API_URl1 = `https://api.themoviedb.org/3/trending/all/week?api_key=594c8f852d2f55546b5698acac88ae46`   for week
+    const API_URl1= `https://api.themoviedb.org/3/trending/all/day?api_key=594c8f852d2f55546b5698acac88ae46`
+    // for day
+    trengingDom(API_URl1)
+    const API_URl2 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=2020&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
+    popularDom(API_URl2)
 
 };
 
-function changeTheDom(url1) {
+function trengingDom(url1) {
     const main = document.getElementById('main')
     const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
     getMovies(url1)
@@ -89,4 +93,68 @@ function changeTheDom(url1) {
         })
     }
 
+}
+
+
+function popularDom(url1) {
+    const main = document.getElementById('main1')
+    const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
+    getMovies(url1)
+
+    async function getMovies(url) {
+        const res = await fetch(url)
+        const data = await res.json()
+        x = data.results;
+        showMovies(x);
+    }
+    function getClassByrate(vote) {
+        if (vote >= 8) {
+            return 'green'
+        }
+        else if (vote >= 5) {
+            return 'orange'
+        }
+        else {
+            return 'red'
+        }
+    }
+
+    function showMovies(movies) {
+        main.innerHTML = ''
+        movies.forEach((element) => {
+            const { poster_path} = element
+             const movieEl = document.createElement('div')
+            movieEl.classList.add('cover-item')
+            movieEl.setAttribute("style", `background-image: url("${IMG_PATH + poster_path} ")`);
+            main.appendChild(movieEl)
+
+        })
+    }
+
+}
+
+function todayMovie(){
+    console.log("todayss")
+    const API_URl12= `https://api.themoviedb.org/3/trending/all/day?api_key=594c8f852d2f55546b5698acac88ae46`
+    trengingDom(API_URl12)
+}
+function thisWeekMovie(){
+    console.log("this weel")
+    const API_URl13 = `https://api.themoviedb.org/3/trending/all/week?api_key=594c8f852d2f55546b5698acac88ae46`
+    trengingDom(API_URl13)
+}
+function streamingNow(){
+    console.log("streaming ")
+    const API_URl21 = `https://api.themoviedb.org/3/discover/movie?api_key=594c8f852d2f55546b5698acac88ae46&watch_region=US&with_watch_monetization_types=flatrate`
+    popularDom(API_URl21)
+}
+function onTvNow(){
+    console.log("on tv")
+    const API_URl22 = `https://api.themoviedb.org/3/discover/tv?api_key=594c8f852d2f55546b5698acac88ae46&watch_region=US&with_watch_monetization_types=rent`
+    popularDom(API_URl22)
+}
+function inThreatersNow(){
+    const API_URl22 = `https://api.themoviedb.org/3/discover/movie?api_key=594c8f852d2f55546b5698acac88ae46&region=US&with_release_type=3|2`
+    console.log("threaterss")
+    popularDom(API_URl22)
 }

@@ -92,8 +92,7 @@ function changeTheDom(url1) {
                 <h3>${title}</h3>
                 <span class="${getClassByrate(vote_average)}">${vote_average}</span>
                 <!-- favorite button -->
-                <button class="favourite-movie" onclick="addFavoriteItem(${index})"
-                >+</button>   
+                <button class="favourite-movie" id="eye-${index}" onclick="addFavoriteItem(${index})"><i class="fa fa-eye" aria-hidden="true"></i></button>  
           </div>`
 
             main.appendChild(movieEl)
@@ -103,8 +102,34 @@ function changeTheDom(url1) {
 
 }
 
+let movie_dir = [];
+
+function getDirector(index) {
+    let dirName = "Un Known";
+    const new_url = `https://api.themoviedb.org/3/movie/${x[index].id}/credits?api_key=594c8f852d2f55546b5698acac88ae46&language=en-US`
+
+    async function getMoviesForDirector(new_url) {
+        const result = await fetch(new_url)
+        const credit_data = await result.json()
+        movie_dir = credit_data.crew
+        // console.log(movie_dir)
+
+    }
+    getMoviesForDirector(new_url)
+
+
+
+    movie_dir.forEach((element) => {
+        const{job ,name}=element     
+        if(job=="Director"){
+            dirName=name
+        }
+         })
+    return dirName;
+}
+
+
 function pop(index) {
-    console.log(x[index])
     const lightbox = document.getElementById('lightbox')
     const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
     const Tool = document.createElement('div')
@@ -123,6 +148,10 @@ function pop(index) {
       
       <div class="overview-wrap">
         <p class="overview">${x[index].overview}</p>
+        <br>
+      </div>
+      <div class="director-wrap">
+        <p class="director">Director : </p> <span>${getDirector(index)}</span>
         <br>
       </div>
       <div class="more-details">
@@ -157,13 +186,10 @@ function getGenre(genre) {
     genre.forEach(function (value) {
 
         let G = Return(value)
-        text1 = text1 + G + "/"
+        text1 = text1 + G + " "
     });
     return text1
 }
-
-
-
 
 function Return(value) {
 
@@ -228,7 +254,6 @@ function Return(value) {
 
 }
 
-
 function getDate(date) {
 
 
@@ -265,8 +290,6 @@ function getStar(vote) {
 
 }
 
-
-
 function closePopup() {
 
     document.getElementById('blackOverlay').style.display = 'none';
@@ -275,12 +298,15 @@ function closePopup() {
 }
 
 
-
-
 function addFavoriteItem(index) {
+    // document.getElementById('eye').find("i").toggleClass("fa-eye fa-eye-slash");
+    let element = document.getElementById('eye-' + index).getElementsByClassName("fa")[0]
+    console.log(element)
+    element.classList.remove("fa-eye")
+    element.classList.add("fa-eye-slash")
+
     const list = JSON.parse(localStorage.getItem('favoriteMovies')) || []
     const movie = x.find(item => item.id === Number(x[index].id))
-    // console.log(list)
     console.log(movie)
     if (list.some(item => item.id === Number(x[index].id))) {
         alert(`${movie.title} is already in your favorite list.`)
@@ -305,7 +331,9 @@ while (currentYear >= earliestYear) {
     dateDropdown.add(dateOption);
     currentYear -= 1;
 }
+
 const Genre_Map = new Map();
+Genre_Map.set('All Genre', 10749);
 Genre_Map.set('Action', 28);
 Genre_Map.set('Adventure', 12);
 Genre_Map.set('Animation', 16);
@@ -326,6 +354,13 @@ Genre_Map.set('Thriller', 53);
 Genre_Map.set('War', 10752);
 Genre_Map.set('Western', 37);
 
+// let genreDropdown = document.getElementById('genre-dropdown');
+// for (const [key,element] of Genre_Map) {
+//     let genreOption = document.createElement('option');
+//     genreOption.text = element;
+//     genreOption.value=key;
+//     genreDropdown.add(genreOption);
+// }
 let genreDropdown = document.getElementById('genre-dropdown');
 for (const [key] of Genre_Map) {
     let genreOption = document.createElement('option');
@@ -335,26 +370,58 @@ for (const [key] of Genre_Map) {
 
 
 document.getElementById("date-dropdown").addEventListener("click", () => {
-
-    // document.getElementById('search-value').value = ''
-    
     let page_number = 1;
-    let gerneInput = document.getElementById("genre-dropdown").value || 28;
+    let gerneInput = document.getElementById("genre-dropdown").value;
     let genre_key = Genre_Map.get(gerneInput);
     let dateInput = document.getElementById("date-dropdown").value || 2022;
-    console.log("date is clicked with date "+dateInput+"page"+ page_number + "genre"+genre_key);
-    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre_key}&primary_release_year=${dateInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log("date is clicked with date " + dateInput + "page" + page_number + "genre" + genre_key);
+    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre_key}&primary_release_year=${dateInput}&sort_by=popularity.${getsort()}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log(API_URl)
     changeTheDom(API_URl)
 
 });
 document.getElementById("genre-dropdown").addEventListener("click", () => {
-    
-    // document.getElementById('search-value').value = ''
+
     let page_number = 1;
-    let gerneInput = document.getElementById("genre-dropdown").value || 28;
+    let gerneInput = document.getElementById("genre-dropdown").value;
     let genre_key = Genre_Map.get(gerneInput);
     let dateInput = document.getElementById("date-dropdown").value || 2022;
-    console.log("genre is clicked with date "+dateInput+"page"+ page_number + "genre"+genre_key);
-    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre_key}&primary_release_year=${dateInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log("date is clicked with date " + dateInput + "page" + page_number + "genre" + genre_key);
+    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre_key}&primary_release_year=${dateInput}&sort_by=popularity.${getsort()}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log(API_URl)
+    changeTheDom(API_URl)
+
+});
+
+//search bar
+document.getElementById('search-value').addEventListener("input", function () {
+    let inputValue = document.getElementById('search-value').value;
+    console.log(inputValue)
+    const API_URl = `https://api.themoviedb.org/3/search/movie?api_key=594c8f852d2f55546b5698acac88ae46&query=${inputValue}`
     changeTheDom(API_URl)
 });
+
+document.getElementById("sort-dropdown").addEventListener("click", () => {
+
+    let page_number = 1;
+    let gerneInput = document.getElementById("genre-dropdown").value;
+    let genre_key = Genre_Map.get(gerneInput);
+    let dateInput = document.getElementById("date-dropdown").value || 2022;
+    console.log("date is clicked with date " + dateInput + "page" + page_number + "genre" + genre_key);
+    const API_URl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre_key}&primary_release_year=${dateInput}&sort_by=popularity.${getsort()}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log(API_URl)
+    changeTheDom(API_URl)
+
+});
+
+function getsort() {
+    let inputValue1 = document.getElementById('sort-dropdown').value;
+    if (inputValue1 == "A-Z") {
+        return 'asc'
+    }
+    else if (inputValue1 == "Z-A") {
+        return 'desc'
+    }
+    else
+        return 'desc'
+}

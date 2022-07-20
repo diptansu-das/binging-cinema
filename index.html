@@ -14,7 +14,7 @@
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
     <style type="text/css">
-    
+
     </style>
 </head>
 
@@ -48,8 +48,8 @@
 
     </header>
 
-
-
+    <!-- header ends -->
+    <!-- header starts -->
     <div class="login-form-container">
 
         <i class="fas fa-times" id="form-close"></i>
@@ -66,9 +66,8 @@
         </form>
 
     </div>
-
-
-
+    <!-- login ends -->
+    <!-- home wallpaper  -->
     <section class="home" id="home">
 
         <div class="content">
@@ -97,13 +96,51 @@
         </div>
 
     </section>
+    <!-- home wallpaper ends  -->
 
+    <section id="Trending-bar">
+        
+        <div class="o-switch btn-group" data-toggle="buttons" role="group" id="tgle-1">
+            <label class="btn btn-secondary ">
+                Trending
+            </label>
+            <label class="btn btn-secondary active" onclick="todayMovie()">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> Today
+            </label>
+            <label class="btn btn-secondary" onclick="thisWeekMovie()" >
+                <input type="radio" name="options" id="option2" autocomplete="off"> This Week
+            </label>
+        </div>
 
-    <section>
         <div id="row-fluid">
-            <div class="cover-container" id="main">  
+            <div class="cover-container" id="main">
             </div>
         </div>
+
+    </section>
+    
+    <section id="popular-bar">
+        
+        <div class="o-switch btn-group" data-toggle="buttons" role="group" id="tgle-1">
+            <label class="btn btn-secondary ">
+                What's Popular
+            </label>
+            <label class="btn btn-secondary active" onclick="streamingNow()">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> Streaming
+            </label>
+            <label class="btn btn-secondary" onclick="onTvNow()">
+                <input type="radio" name="options" id="option2" autocomplete="off"> On TV
+            </label>
+            <label class="btn btn-secondary" onclick="inThreatersNow()">
+                <input type="radio" name="options" id="option3" autocomplete="off"> In Theaters
+            </label>
+        </div>
+
+        <div id="row-fluid">
+            <div class="cover-container" id="main1">
+            </div>
+        </div>
+
     </section>
 
 

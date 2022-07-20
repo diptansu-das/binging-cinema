@@ -130,7 +130,7 @@ function changeTheDom(url1) {
 
     function getClassByrate(vote) {
         if (vote >= 8) {
-            return 'green'
+            return 'blue'
         }
         else if (vote >= 5) {
             return 'orange'
@@ -153,8 +153,8 @@ function changeTheDom(url1) {
                 <h3>${name}</h3>
                 <span class="${getClassByrate(vote_average)}">${vote_average}</span>
                 <!-- favorite button -->
-                <button class="favourite-movie" onclick="addFavoriteItem(${index})"
-                >+</button>   
+                <button class="favourite-movie" id="eye-${index}" onclick="addFavoriteItem(${index})"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                
           </div>`
 
             main.appendChild(movieEl)
@@ -165,7 +165,7 @@ function changeTheDom(url1) {
 }
 
 function pop(index) {
-    
+
     const lightbox = document.getElementById('lightbox')
     const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
     const Tool = document.createElement('div')
@@ -218,7 +218,7 @@ function getGenre(genre) {
     genre.forEach(function (value) {
 
         let G = Return(value)
-        text1 = text1 + G + "/"
+        text1 = text1 + G + " "
     });
     return text1
 }
@@ -337,12 +337,16 @@ function closePopup() {
 
 
 function addFavoriteItem(index) {
+    let element=document.getElementById('eye-'+index).getElementsByClassName("fa")[0]
+    console.log(element)
+    element.classList.remove("fa-eye")
+    element.classList.add("fa-eye-slash")
     const list = JSON.parse(localStorage.getItem('favoriteMovies')) || []
     const movie = x.find(item => item.id === Number(x[index].id))
     // console.log(list)
     console.log(movie)
     if (list.some(item => item.id === Number(x[index].id))) {
-        alert(`${movie.title} is already in your favorite list.`)
+        alert(`${movie.name} is already in your favorite list.`)
     } else {
         list.push(movie)
         //   alert(`Added ${movie.title} to your favorite list!`)
@@ -368,6 +372,7 @@ while (currentYear >= earliestYear) {
 const Genre_Map = new Map();
 // Genre_Map.set('Action', 28);
 // Genre_Map.set('Adventure', 12);
+Genre_Map.set('All Genre',10751)
 Genre_Map.set('Animation', 16);
 Genre_Map.set('Crime', 80);
 Genre_Map.set('Comedy', 35);
@@ -396,24 +401,58 @@ for (const [key] of Genre_Map) {
 document.getElementById("date-dropdown").addEventListener("click", () => {
 
     // document.getElementById('search-value').value = ''
-    
+
     let page_number = 1;
-    let gerneInput = document.getElementById("genre-dropdown").value || 28;
+    let gerneInput = document.getElementById("genre-dropdown").value;
     let genre_key = Genre_Map.get(gerneInput);
     let dateInput = document.getElementById("date-dropdown").value || 2022;
-    console.log("date is clicked with date "+dateInput+"page"+ page_number + "genre"+genre_key);
-    const API_URl = `https://api.themoviedb.org/3/discover/tv?with_genres=${genre_key}&primary_release_year=${dateInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log("date is clicked with date " + dateInput + "page" + page_number + "genre" + genre_key);
+    const API_URl = `https://api.themoviedb.org/3/discover/tv?with_genres=${genre_key}&first_air_date_year=${dateInput}&sort_by=popularity.${getsort()}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log(API_URl)
     changeTheDom(API_URl)
+
 
 });
 document.getElementById("genre-dropdown").addEventListener("click", () => {
-    
     // document.getElementById('search-value').value = ''
     let page_number = 1;
-    let gerneInput = document.getElementById("genre-dropdown").value || 28;
+    let gerneInput = document.getElementById("genre-dropdown").value;
     let genre_key = Genre_Map.get(gerneInput);
     let dateInput = document.getElementById("date-dropdown").value || 2022;
-    console.log("genre is clicked with date "+dateInput+"page"+ page_number + "genre"+genre_key);
-    const API_URl = `https://api.themoviedb.org/3/discover/tv?with_genres=${genre_key}&primary_release_year=${dateInput}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log("date is clicked with date " + dateInput + "page" + page_number + "genre" + genre_key);
+    const API_URl = `https://api.themoviedb.org/3/discover/tv?with_genres=${genre_key}&first_air_date_year=${dateInput}&sort_by=popularity.${getsort()}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log(API_URl)
+    changeTheDom(API_URl)
+
+});
+
+document.getElementById('search-value').addEventListener("input", function () {
+    let inputValue = document.getElementById('search-value').value;
+    console.log(inputValue)
+    const API_URl = `https://api.themoviedb.org/3/search/tv?api_key=594c8f852d2f55546b5698acac88ae46&query=${inputValue}`
     changeTheDom(API_URl)
 });
+document.getElementById("sort-dropdown").addEventListener("click", () => {
+
+    let page_number = 1;
+    let gerneInput = document.getElementById("genre-dropdown").value;
+    let genre_key = Genre_Map.get(gerneInput);
+    let dateInput = document.getElementById("date-dropdown").value || 2022;
+    console.log("date is clicked with date " + dateInput + "page" + page_number + "genre" + genre_key);
+    const API_URl = `https://api.themoviedb.org/3/discover/tv?with_genres=${genre_key}&first_air_date_year=${dateInput}&sort_by=popularity.${getsort()}&api_key=594c8f852d2f55546b5698acac88ae46&page=${page_number}`
+    console.log(API_URl)
+    changeTheDom(API_URl)
+
+});
+
+function getsort(){
+    let inputValue1 = document.getElementById('sort-dropdown').value;
+    if(inputValue1 =="A-Z"){
+        return 'asc'
+    }
+    else if(inputValue1 =="Z-A"){
+        return 'desc'
+    }
+    else
+    return 'desc'
+}
