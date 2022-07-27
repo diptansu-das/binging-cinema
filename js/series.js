@@ -148,14 +148,15 @@ function changeTheDom(url1) {
             const movieEl = document.createElement('div')
             movieEl.classList.add('movie')
             movieEl.innerHTML = `
-           <img src="${IMG_PATH + poster_path}" alt="${name}" onerror="this.src='images/error.png'"  onclick="pop(${index})" >
-            <div class="movie-info">
-                <h3>${name}</h3>
-                <span class="${getClassByrate(vote_average)}">${vote_average}</span>
-                <!-- favorite button -->
-                <button class="favourite-movie" id="eye-${index}" onclick="addFavoriteItem(${index})"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                
-          </div>`
+            <img src="${IMG_PATH + poster_path}" alt="${name}" onerror="this.src='images/error.png'"  onclick="pop(${index})" >
+             <div class="movie-info">
+                 <h3>${name}</h3>
+                 <span class="${getClassByrate(vote_average)}">${vote_average}</span>
+                 <!-- favorite button -->
+                 <button class="favourite-movie" id="eye-${index}" onclick="addFavoriteItem(${index})">
+                 <div style="display:none;" id="count-${index}">1</div>
+                 <i class="fa fa-eye" aria-hidden="true"></i></button>  
+           </div>`
 
             main.appendChild(movieEl)
 
@@ -335,26 +336,40 @@ function closePopup() {
 
 
 
-
+var counter = 1
 function addFavoriteItem(index) {
-    let element=document.getElementById('eye-'+index).getElementsByClassName("fa")[0]
-    console.log(element)
-    element.classList.remove("fa-eye")
-    element.classList.add("fa-eye-slash")
-    const list = JSON.parse(localStorage.getItem('favoriteMovies')) || []
-    const movie = x.find(item => item.id === Number(x[index].id))
-    // console.log(list)
-    console.log(movie)
-    if (list.some(item => item.id === Number(x[index].id))) {
-        alert(`${movie.name} is already in your favorite list.`)
-    } else {
+
+    console.log("before for " + counter )
+    let element = document.getElementById('eye-' + index).getElementsByClassName("fa")[0]
+    let count=document.getElementById('count-'+index)
+    let countV=count.innerText
+    console.log("countV"+countV)
+    if (counter & countV) 
+    {
+        element.classList.remove("fa-eye")
+        element.classList.add("fa-eye-slash")
+        console.log("counterer= " + counter )
+        count.innerHTML="0"
+        console.log(count.innerHTML)
+        const list = JSON.parse(localStorage.getItem('favoriteMovies')) || []
+        const movie = x.find(item => item.id === Number(x[index].id))
         list.push(movie)
-        //   alert(`Added ${movie.title} to your favorite list!`)
+        localStorage.setItem('favoriteMovies', JSON.stringify(list))
     }
-    localStorage.setItem('favoriteMovies', JSON.stringify(list))
+    else {
+        count.innerHTML="1"
+        console.log(count.innerHTML)
+        element.classList.remove("fa-eye-slash")
+        element.classList.add("fa-eye")
+        console.log("counterer in else" + counter)
+        const moive = JSON.parse(localStorage.getItem('favoriteMovies')) || []
+        const mIndex = moive.findIndex(element => element.id === Number(x[index].id))
+        moive.splice(mIndex,1)
+        localStorage.setItem('favoriteMovies', JSON.stringify(moive))
+    }
+
 
 }
-
 // add filter values
 
 let dateDropdown = document.getElementById('date-dropdown');

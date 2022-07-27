@@ -107,18 +107,7 @@ function popularDom(url1) {
         x = data.results;
         showMovies(x);
     }
-    function getClassByrate(vote) {
-        if (vote >= 8) {
-            return 'green'
-        }
-        else if (vote >= 5) {
-            return 'orange'
-        }
-        else {
-            return 'red'
-        }
-    }
-
+    
     function showMovies(movies) {
         main.innerHTML = ''
         movies.forEach((element) => {

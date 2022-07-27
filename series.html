@@ -52,18 +52,20 @@
 
         <i class="fas fa-times" id="form-close"></i>
 
-        <form action="">
-            <h3>login</h3>
-            <input type="email" class="box" placeholder="enter your email">
-            <input type="password" class="box" placeholder="enter your password">
-            <input type="submit" value="login now" class="btn">
+        <form action="" id="credentialForm">
+            <h3 id="formName">login</h3>
+            <input type="email" id="email" class="box" placeholder="enter your email">
+            <input type="password" id="password" class="box" placeholder="enter your password">
+            <input type="button" id="login" value="login now" class="btn">
+            <input type="button" id="logout" value="login out" class="btn">
             <input type="checkbox" id="remember">
             <label for="remember">remember me</label>
             <p>forget password? <a href="#">click here</a></p>
-            <p>don't have and account? <a href="#">register now</a></p>
+            <p>don't have and account? <a href="#" id="signupcontainer">register now</a></p>
         </form>
 
     </div>
+    <!-- login ends -->
 
     <!-- randome suggestion -->
     <main id="main">
@@ -125,6 +127,7 @@
     <!-- custom js file link  -->
     <script src="js/series.js"></script>
 
+    <script type="module" src="js/bingingDatabase.js" ></script>
 </body>
 
 </html>

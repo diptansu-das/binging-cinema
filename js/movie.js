@@ -1,3 +1,5 @@
+
+
 let searchBtn = document.querySelector('#search-btn');
 let searchBar = document.querySelector('.search-bar-container');
 let formBtn = document.querySelector('#login-btn');
@@ -92,7 +94,9 @@ function changeTheDom(url1) {
                 <h3>${title}</h3>
                 <span class="${getClassByrate(vote_average)}">${vote_average}</span>
                 <!-- favorite button -->
-                <button class="favourite-movie" id="eye-${index}" onclick="addFavoriteItem(${index})"><i class="fa fa-eye" aria-hidden="true"></i></button>  
+                <button class="favourite-movie" id="eye-${index}" onclick="addFavoriteItem(${index})">
+                <div style="display:none;" id="count-${index}">1</div>
+                <i class="fa fa-eye" aria-hidden="true"></i></button>  
           </div>`
 
             main.appendChild(movieEl)
@@ -105,14 +109,13 @@ function changeTheDom(url1) {
 let movie_dir = [];
 
 function getDirector(index) {
-    let dirName = "Un Known";
+    let dirName = "UnKnown";
     const new_url = `https://api.themoviedb.org/3/movie/${x[index].id}/credits?api_key=594c8f852d2f55546b5698acac88ae46&language=en-US`
 
     async function getMoviesForDirector(new_url) {
         const result = await fetch(new_url)
         const credit_data = await result.json()
         movie_dir = credit_data.crew
-        // console.log(movie_dir)
 
     }
     getMoviesForDirector(new_url)
@@ -120,14 +123,13 @@ function getDirector(index) {
 
 
     movie_dir.forEach((element) => {
-        const{job ,name}=element     
-        if(job=="Director"){
-            dirName=name
+        const { job, name } = element
+        if (job == "Director") {
+            dirName = name
         }
-         })
+    })
     return dirName;
 }
-
 
 function pop(index) {
     const lightbox = document.getElementById('lightbox')
@@ -298,26 +300,42 @@ function closePopup() {
 }
 
 
+var counter = 1
 function addFavoriteItem(index) {
-    // document.getElementById('eye').find("i").toggleClass("fa-eye fa-eye-slash");
-    let element = document.getElementById('eye-' + index).getElementsByClassName("fa")[0]
-    console.log(element)
-    element.classList.remove("fa-eye")
-    element.classList.add("fa-eye-slash")
 
-    const list = JSON.parse(localStorage.getItem('favoriteMovies')) || []
-    const movie = x.find(item => item.id === Number(x[index].id))
-    console.log(movie)
-    if (list.some(item => item.id === Number(x[index].id))) {
-        alert(`${movie.title} is already in your favorite list.`)
-    } else {
+    console.log("before for " + counter )
+    let element = document.getElementById('eye-' + index).getElementsByClassName("fa")[0]
+    let count=document.getElementById('count-'+index)
+    let countV=count.innerText
+    console.log("countV"+countV)
+    if (counter & countV) 
+    {
+        element.classList.remove("fa-eye")
+        element.classList.add("fa-eye-slash")
+        console.log("counterer= " + counter )
+        count.innerHTML="0"
+        console.log(count.innerHTML)
+        const list = JSON.parse(localStorage.getItem('favoriteMovies')) || []
+        const movie = x.find(item => item.id === Number(x[index].id))
         list.push(movie)
-        //   alert(`Added ${movie.title} to your favorite list!`)
+        localStorage.setItem('favoriteMovies', JSON.stringify(list))
     }
-    localStorage.setItem('favoriteMovies', JSON.stringify(list))
+    else {
+        count.innerHTML="1"
+        console.log(count.innerHTML)
+        element.classList.remove("fa-eye-slash")
+        element.classList.add("fa-eye")
+        console.log("counterer in else" + counter)
+        const moive = JSON.parse(localStorage.getItem('favoriteMovies')) || []
+        const mIndex = moive.findIndex(element => element.id === Number(x[index].id))
+        moive.splice(mIndex,1)
+        localStorage.setItem('favoriteMovies', JSON.stringify(moive))
+    }
+
 
 }
 
+ 
 // adding filter bar 
 let dateDropdown = document.getElementById('date-dropdown');
 
@@ -354,13 +372,6 @@ Genre_Map.set('Thriller', 53);
 Genre_Map.set('War', 10752);
 Genre_Map.set('Western', 37);
 
-// let genreDropdown = document.getElementById('genre-dropdown');
-// for (const [key,element] of Genre_Map) {
-//     let genreOption = document.createElement('option');
-//     genreOption.text = element;
-//     genreOption.value=key;
-//     genreDropdown.add(genreOption);
-// }
 let genreDropdown = document.getElementById('genre-dropdown');
 for (const [key] of Genre_Map) {
     let genreOption = document.createElement('option');
@@ -425,3 +436,5 @@ function getsort() {
     else
         return 'desc'
 }
+
+

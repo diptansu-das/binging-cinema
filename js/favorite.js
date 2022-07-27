@@ -107,7 +107,7 @@ const mainFavorite=document.querySelector("#main-favourite")
     function showMovies(movies) {
         mainFavorite.innerHTML = ''
         movies.forEach((element, index) => {
-            const { name,title, poster_path, vote_average } = element
+            const { name,title, poster_path, vote_average,id } = element
 
             const movieEl = document.createElement('div')
             movieEl.classList.add('movie')
@@ -117,7 +117,7 @@ const mainFavorite=document.querySelector("#main-favourite")
             <h3>${title || name}</h3>
             <span class="${getClassByrate(vote_average)}">${vote_average}</span>
             <!-- favorite button -->
-            <button class="favourite-movie" onclick=" deleteNote(${index})"
+            <button class="favourite-movie" onclick=" deleteNote(${id})"
             >-</button>
         </div>`
 
@@ -299,12 +299,13 @@ function closePopup() {
 
 
 
-function deleteNote(index) {
+function deleteNote(id) {
     //   console.log("I am deleting", index);
     
     const moive =JSON.parse(localStorage.getItem('favoriteMovies')) || []
     
-      moive.splice(index, 1);
-      localStorage.setItem('favoriteMovies', JSON.stringify(moive))
-      showMovies(moive)
+    const index = moive.findIndex(element => element.id === id)
+    moive.splice(index,1)
+    localStorage.setItem('favoriteMovies', JSON.stringify(moive))
+    showMovies(moive)
     }
