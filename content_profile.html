@@ -10,14 +10,13 @@
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+   
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
-
 
     <!-- header section starts  -->
     <div id="spinner">
@@ -34,24 +33,24 @@
             <a class="makeActive" href="movie.html">Movies</a>
             <a href="series.html">Series</a>
             <a href="checkTime.html">TimeWasted</a>
-            <!-- <a href="favourite.html" onclick="displayDataList()">WatchList</a> -->
+            <a href="favourite.html" onclick="displayDataList()">WatchList</a>
         </nav>
         <!-- <div class="favourites">
                 <button class="favourite-btn"> <a href="favourite.html">Favourite</a> </button>
             </div> -->
 
-        <div class="icons">
-            <i class="fas fa-search" id="search-btn"></i>
-            <i class="fas fa-user" id="login-btn"></i>
-            <div class="dropdown" id="myDropdown12">
-                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <input type="button" id="logout" value="login out" class="btn">
-                </div>
+            <div class="icons">
+                <i class="fas fa-search" id="search-btn"></i>
+                <i class="fas fa-user" id="login-btn"></i>
+                <div class="dropdown" id="myDropdown12">
+                    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                    <div id="myDropdown" class="dropdown-content">
+                      <a href="#">Link 1</a>
+                      <a href="#">Link 2</a>
+                      <input type="button" id="logout" value="login out" class="btn">
+                    </div>
+                  </div>
             </div>
-        </div>
 
         <form action="" class="search-bar-container">
             <input type="search" id="search-bar" placeholder="search here...">
@@ -79,31 +78,19 @@
         </form>
 
     </div>
+    <!-- login ends -->
 
-    <!-- Favourite List -->
-    <main id="main-favourite">
-
-    </main>
-    <!-- filter bar -->
-
-    <!-- light box  -->
-
-    <div id="blackOverlay" class="blackOverlay" onclick="closePopup()"></div>
-    <div id="lightbox" class="light123">
-
+    <div id="profile-container" style="color: white;">
     </div>
-    <div id="background" class="showit">
+<!--  
+    -->
+  
 
-    </div>
-
-
-
-
+</div>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
     <!-- custom js file link  -->
-    <script src="js/favorite.js"></script>
-    <script type="module" src="js/bingingDatabase.js"></script>
+    <script src="js/movie.js"></script>
+    <script src="js/content_profile.js"></script>
+    <script type="module" src="js/bingingDatabase.js" ></script>
 </body>
-
 </html>

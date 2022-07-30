@@ -10,7 +10,7 @@
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-   
+
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
 
@@ -33,15 +33,23 @@
             <a class="makeActive" href="movie.html">Movies</a>
             <a href="series.html">Series</a>
             <a href="checkTime.html">TimeWasted</a>
-            <a href="favourite.html" onclick="displayDataList()">WatchList</a>
+            <!-- <a href="favourite.html" onclick="displayDataList()">WatchList</a> -->
         </nav>
         <!-- <div class="favourites">
                 <button class="favourite-btn"> <a href="favourite.html">Favourite</a> </button>
             </div> -->
 
-        <div class="icons">
+        <div class="icons" id="iconInIndex">
             <i class="fas fa-search" id="search-btn"></i>
             <i class="fas fa-user" id="login-btn"></i>
+            <div class="dropdown" id="myDropdown12">
+                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <input type="button" id="logout" value="login out" class="btn">
+                </div>
+            </div>
         </div>
 
         <form action="" class="search-bar-container">
@@ -108,11 +116,7 @@
                 <option>A-Z</option>
                 <option>Z-A</option>
             </select>
-            <select name="sort" id='sort-dropdown' class="sort">
-                <option>Rating </option>
-                <option>1</option>
-                <option>2</option>
-            </select>
+
 
         </div>
 
@@ -131,7 +135,7 @@
 
     <!-- custom js file link  -->
     <script src="js/movie.js"></script>
-
+    <script type="module" src="js/bingingDatabase.js"></script>
 </body>
 
 </html>

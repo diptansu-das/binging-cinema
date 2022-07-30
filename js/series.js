@@ -124,7 +124,7 @@ function changeTheDom(url1) {
         const res = await fetch(url)
         const data = await res.json()
         x = data.results;
-        console.log(x);
+        // console.log(x);
         showMovies(x);
     }
 
@@ -164,6 +164,30 @@ function changeTheDom(url1) {
     }
 
 }
+let movie_dir = [];
+
+function getDirector(index) {
+    let dirName = "UnKnown";
+    const new_url = `https://api.themoviedb.org/3/movie/${x[index].id}/credits?api_key=594c8f852d2f55546b5698acac88ae46&language=en-US`
+
+    async function getMoviesForDirector(new_url) {
+        const result = await fetch(new_url)
+        const credit_data = await result.json()
+        movie_dir = credit_data.crew
+
+    }
+    getMoviesForDirector(new_url)
+
+
+
+    movie_dir.forEach((element) => {
+        const { job, name } = element
+        if (job == "Director") {
+            dirName = name
+        }
+    })
+    return dirName;
+}
 
 function pop(index) {
 
@@ -175,28 +199,37 @@ function pop(index) {
     Tool.setAttribute("id", "popup");
     Tool.innerHTML = ` <div class="card" >
     <div class="movie-poster">
-    <img src="${IMG_PATH + x[index].poster_path}" height="233px">
+    <img  id="moviePosterAfter" src="${IMG_PATH + x[index].poster_path}" height="233px" >
+      <div class="theImages1">
+       <a onClick=getMydate()><i class="fa fa-heart" aria-hidden="true"></i></a>
+       <a onClick=getMydate1()><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+       <a onClick=getMydate2()><i class="fa fa-eye" aria-hidden="true"></i></a>
+      </div>
     </div>
     <div class="movie-details">
       <div class="movie-title">
-        
         <h3>${x[index].name}</h3>
+        
       </div>
-      
+      <div class="director-wrap">
+        <p class="director">Directed By:<span style="text-decoration:underline"> ${getDirector(index)} </span></p>
+        <img src= "${getStar(x[index].vote_average)}" > 
+        
+      </div>
       <div class="overview-wrap">
         <p class="overview">${x[index].overview}</p>
-        <br>
       </div>
+      
       <div class="more-details">
         <h4 class="genre">${getGenre(x[index].genre_ids)}</h4>
-        <h4 class="release-date"> Release Date -${getDate(x[index].first_air_date)}</h4>
-        <h4 class="genre">Language -English</h4>
-       <br>
-      </div>
-      <div class="binging-rating">
-      <h4>Binging Cinema Rating</h4>
-     <img src= "${getStar(x[index].vote_average)}" >
-      </div>
+        <h4 class="release-date">${getDate(x[index].first_air_date)}</h4>
+        <h4 class="genre">English</h4>
+     </div>  
+     
+     
+     
+     <a href="content_profile.html" class="btn btn-primary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Primary link</a>
+     
     </div>
   </div>`;
 
@@ -204,7 +237,7 @@ function pop(index) {
 
     const backbox = document.getElementById('background')
     backbox.setAttribute("style", `background-image: url('${IMG_PATH + x[index].backdrop_path}'),url('images/load.png')`);
-
+    document.getElementById("background").style.filter = " brightness(65%)";
 
     document.getElementById('blackOverlay').style.display = 'block';
     document.getElementById('popup').style.display = 'block';
@@ -333,6 +366,17 @@ function closePopup() {
     document.getElementById('popup').style.display = 'none';
     document.getElementById('background').style.display = 'none';
 }
+
+function getMydate(){
+    console.log("favourite is clicked")
+}
+function getMydate1(){
+    console.log("Watchlist is clicked")
+}
+function getMydate2(){
+    console.log("Watched is clicked")
+}
+
 
 
 
@@ -471,3 +515,21 @@ function getsort(){
     else
     return 'desc'
 }
+//toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }

@@ -90,10 +90,6 @@ var swiper = new Swiper(".brand-slider", {
 if (navigator.userAgent.indexOf('Windows NT 6.1') > 0)
     $('body').addClass('windows');
 
-
-
-
-
 // LOCALSTORAGE FUNCTIONS
 
 // check to see if supports LocalStorage

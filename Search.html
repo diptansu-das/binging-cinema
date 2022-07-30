@@ -31,15 +31,23 @@
                 <a href="movie.html" >Movies</a>
                 <a href="series.html">Series</a>
                 <a href="checkTime.html">TimeWasted</a>
-                <a class="makeActive" href="favourite.html" onclick="displayDataList()">WatchList</a>
+                <!-- <a class="makeActive" href="favourite.html" onclick="displayDataList()">WatchList</a> -->
             </nav>
             <!-- <div class="favourites">
                 <button class="favourite-btn"> <a href="favourite.html">Favourite</a> </button>
             </div> -->
-        <div class="icons">
-            <i class="fas fa-search" id="search-btn"></i>
-            <i class="fas fa-user" id="login-btn"></i>
-        </div>
+            <div class="icons">
+                <i class="fas fa-search" id="search-btn"></i>
+                <i class="fas fa-user" id="login-btn"></i>
+                <div class="dropdown" id="myDropdown12">
+                    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                    <div id="myDropdown" class="dropdown-content">
+                      <a href="#">Link 1</a>
+                      <a href="#">Link 2</a>
+                      <input type="button" id="logout" value="login out" class="btn">
+                    </div>
+                  </div>
+            </div>
 
         <form action="" class="search-bar-container">
             <input type="search" id="search-bar" placeholder="search here...">
@@ -79,7 +87,7 @@
 
     <!-- custom js file link  -->
     <script src="js/favorite.js"></script>
-
+    <script type="module" src="js/bingingDatabase.js" ></script>
 </body>
 
 </html>

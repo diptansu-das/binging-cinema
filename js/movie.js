@@ -140,40 +140,49 @@ function pop(index) {
     Tool.setAttribute("id", "popup");
     Tool.innerHTML = ` <div class="card" >
     <div class="movie-poster">
-    <img src="${IMG_PATH + x[index].poster_path}" height="233px">
+    <img  id="moviePosterAfter" src="${IMG_PATH + x[index].poster_path}" height="233px" >
+      <div class="theImages1">
+       <a onClick=getMydate()><i class="fa fa-heart" aria-hidden="true"></i></a>
+       <a onClick=getMydate1()><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+       <a onClick=getMydate2()><i class="fa fa-eye" aria-hidden="true"></i></a>
+      </div>
     </div>
     <div class="movie-details">
       <div class="movie-title">
-        
         <h3>${x[index].title}</h3>
-      </div>
-      
-      <div class="overview-wrap">
-        <p class="overview">${x[index].overview}</p>
-        <br>
+        
       </div>
       <div class="director-wrap">
-        <p class="director">Director : </p> <span>${getDirector(index)}</span>
-        <br>
+        <p class="director">Directed By:<span style="text-decoration:underline"> ${getDirector(index)} </span></p>
+        <img src= "${getStar(x[index].vote_average)}" > 
+        
       </div>
+      <div class="overview-wrap">
+        <p class="overview">${x[index].overview}</p>
+      </div>
+      
       <div class="more-details">
         <h4 class="genre">${getGenre(x[index].genre_ids)}</h4>
-        <h4 class="release-date"> Release Date -${getDate(x[index].release_date)}</h4>
-        <h4 class="genre">Language -English</h4>
-       <br>
-      </div>
-      <div class="binging-rating">
-      <h4>Binging Cinema Rating</h4>
-     <img src= "${getStar(x[index].vote_average)}" >
-      </div>
+        <h4 class="release-date">${getDate(x[index].release_date)}</h4>
+        <h4 class="genre">English</h4>
+     </div>  
+     
+     
+     
+     <a href="content_profile.html" class="btn btn-primary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Primary link</a>
+     
     </div>
   </div>`;
 
-    lightbox.appendChild(Tool)
 
+    lightbox.appendChild(Tool)
+    let movie_id=x[index].id;
+
+    localStorage.setItem('profileID',movie_id);
+    // console.log(localStorage.getItem('profileID'));
     const backbox = document.getElementById('background')
     backbox.setAttribute("style", `background-image: url('${IMG_PATH + x[index].backdrop_path}'),url('images/load.png')`);
-
+    document.getElementById("background").style.filter = " brightness(65%)";
 
     document.getElementById('blackOverlay').style.display = 'block';
     document.getElementById('popup').style.display = 'block';
@@ -182,14 +191,37 @@ function pop(index) {
 
 }
 
+function getMydate(){
+    console.log("favourite is clicked")
+}
+function getMydate1(){
+    console.log("Watchlist is clicked")
+}
+function getMydate2(){
+    console.log("Watched is clicked")
+}
+
+
+
+
 function getGenre(genre) {
-    let text1 = "Genre - ";
-
-    genre.forEach(function (value) {
-
-        let G = Return(value)
-        text1 = text1 + G + " "
-    });
+    let text1 = "";
+    if (genre.length < 3) {
+        for (let i = 0; i < genre.length; i++) {
+            let G = Return(genre[i])
+            var seprator = (genre.length - 1 == i) ? "" : ","
+            text1 = text1 + G + seprator;
+            // console.log(G)
+        }
+    }
+    else {
+        for (let i = 0; i < genre.length-1; i++) {
+            let G = Return(genre[i])
+            var seprator = (genre.length - 2 == i) ? "" : ","
+            text1 = text1 + G + seprator;
+            // console.log(G)
+        }
+    }
     return text1
 }
 
@@ -303,17 +335,16 @@ function closePopup() {
 var counter = 1
 function addFavoriteItem(index) {
 
-    console.log("before for " + counter )
+    console.log("before for " + counter)
     let element = document.getElementById('eye-' + index).getElementsByClassName("fa")[0]
-    let count=document.getElementById('count-'+index)
-    let countV=count.innerText
-    console.log("countV"+countV)
-    if (counter & countV) 
-    {
+    let count = document.getElementById('count-' + index)
+    let countV = count.innerText
+    console.log("countV" + countV)
+    if (counter & countV) {
         element.classList.remove("fa-eye")
         element.classList.add("fa-eye-slash")
-        console.log("counterer= " + counter )
-        count.innerHTML="0"
+        console.log("counterer= " + counter)
+        count.innerHTML = "0"
         console.log(count.innerHTML)
         const list = JSON.parse(localStorage.getItem('favoriteMovies')) || []
         const movie = x.find(item => item.id === Number(x[index].id))
@@ -321,21 +352,21 @@ function addFavoriteItem(index) {
         localStorage.setItem('favoriteMovies', JSON.stringify(list))
     }
     else {
-        count.innerHTML="1"
+        count.innerHTML = "1"
         console.log(count.innerHTML)
         element.classList.remove("fa-eye-slash")
         element.classList.add("fa-eye")
         console.log("counterer in else" + counter)
         const moive = JSON.parse(localStorage.getItem('favoriteMovies')) || []
         const mIndex = moive.findIndex(element => element.id === Number(x[index].id))
-        moive.splice(mIndex,1)
+        moive.splice(mIndex, 1)
         localStorage.setItem('favoriteMovies', JSON.stringify(moive))
     }
 
 
 }
 
- 
+
 // adding filter bar 
 let dateDropdown = document.getElementById('date-dropdown');
 
@@ -437,4 +468,21 @@ function getsort() {
         return 'desc'
 }
 
+//toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}

@@ -2,7 +2,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
 import { getDatabase, set, ref, update, onValue } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-database.js";
-import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signOut } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-auth.js';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -21,25 +21,27 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database =getDatabase(app);
+const database = getDatabase(app);
 
 const auth = getAuth(app);
 
-var loginState=0;
-const element=document.getElementById('login-btn')
-const credential=document.getElementById('credentialForm')
+var loginState = 0;
+const loginBtn = document.getElementById('login-btn')
+const credential = document.getElementById('credentialForm')
 const formClose = document.querySelector('#form-close');
+const dropdownContent = document.getElementById('myDropdown');
+const dropdownDiv=document.getElementById('myDropdown12')
+const container=document.querySelector(".login-form-container")
+const icons=document.getElementById('impIcons')
 
-document.getElementById('signupcontainer').addEventListener('click',(e)=>{
-  let formName=document.getElementById('formName')
-  formName.innerHTML="sign up"
+const user = auth.currentUser
 
-  const button=document.createElement('signup')
-  button.setAttribute('id','signup')
-  button.setAttribute('value','sign up')
-  button.setAttribute('value','Sign Up')
+document.getElementById('signupcontainer').addEventListener('click', (e) => {
+  let formName = document.getElementById('formName')
+  formName.innerHTML = "sign up"
 
-  credential.innerHTML=`
+
+  credential.innerHTML = `
   <h3 id="formName">Sign up</h3>
             <input type="email" id="email" class="box" placeholder="enter your email">
             <input type="password" id="password" class="box" placeholder="enter your password">
@@ -49,122 +51,154 @@ document.getElementById('signupcontainer').addEventListener('click',(e)=>{
   `
   formClose.addEventListener('click', () => {
     loginForm.classList.remove('active');
-      location.reload()
+    location.reload()
   });
 
-  signup.addEventListener('click',(e)=>{
-    let email=document.getElementById('email').value
-    let password=document.getElementById('password').value
-    let username="Cinephile" + Math.floor(Math.random() * (1000 - 100 + 1))
-  
+
+  dropdownDiv.style.visibility = 'none';
+  loginBtn.style.visibility = 'visible';
+
+
+
+
+// for signup of new user
+
+  signup.addEventListener('click', (e) => {
+    e.preventDefault()
+    console.log("singup user is called")
+    let email = document.getElementById('email').value
+    let password = document.getElementById('password').value
+    let username = "Cinephile" + Math.floor(Math.random() * (1000 - 100 + 1))
+
     createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // for creating user entry in firebase
+        set(ref(database, 'users/' + user.uid), {
+          username: username,
+          email: email,
+          password: password
+        })
+
+        // alert("user created")
+        container.style.background='white'
+        container.innerHTML=`<div class="loader"></div>`
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        alert(errorMessage)
+      });
+  })
+
+})
+
+
+
+
+
+
+
+// for log in of existing user
+
+login.addEventListener('click', (e) => {
+  e.preventDefault()
+  let dt = new Date()
+  console.log("login user is called")
+  let email = document.getElementById('email').value
+  let password = document.getElementById('password').value
+  signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-
-
-      set(ref(database,'users/'+ user.uid),{
-          username: username,
-          email : email,
-          password: password
+      // for updating user entry in firebase
+      update(ref(database, 'users/' + user.uid), {
+        last_login: dt
       })
-  
-      alert("user created")
-      // ...
+      // alert('user logged in')
+      container.style.background='white'
+      container.innerHTML=`<div class="loader"></div>`
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      // ..
       alert(errorMessage)
     });
-  })
-
-})
-
-const user=auth.currentUser
-
-login.addEventListener('click',(e)=>{
-  e.preventDefault()
-  let dt=new Date()
-  let email=document.getElementById('email').value
-  let password=document.getElementById('password').value
-  signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    update(ref(database,'users/'+user.uid),{
-      last_login:dt
-  })
-    // alert('user logged in \n Now click on close button')
-    loginForm.classList.remove('active')
-    setTimeout(location.reload(),3000)
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorMessage)
-  });
 })
 
 formClose.addEventListener('click', () => {
   loginForm.classList.remove('active');
-  if(loginState){
+  if (loginState) {
     location.reload()
   }
 });
-onAuthStateChanged(auth, (user) => {
- 
-  const userLoggedIn=document.createElement('div')
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    // console.log(user)
-    // ...
-    
-      userLoggedIn.classList.add('userloggedin')
-      userLoggedIn.setAttribute('id', 'userloggedin')
-      userLoggedIn.innerHTML=element.innerHTML
-      element.appendChild(userLoggedIn)
-      // console.log(element) 
 
-      const userData = ref(database,'users/'+user.uid);
-      
-      onValue(userData, (snapshot) => {
+function forspinner(){
+      loginForm.classList.remove('active')
+}
+
+
+
+
+// to check if there exists a user currently
+
+onAuthStateChanged(auth, (user) => {
+
+  const userLoggedIn = document.createElement('div')
+  if (user) {
+    console.log("if user is called")
+    const uid = user.uid;
+  
+  
+    loginBtn.style.visibility = 'hidden';
+    dropdownDiv.style.visibility = 'visible';
+
+    setTimeout(forspinner,4000)
+
+    const userData = ref(database, 'users/' + user.uid);
+
+    onValue(userData, (snapshot) => {
       const data = snapshot.val();
       // console.log(data)
       localStorage.setItem('profileData', JSON.stringify(data));
-      let profileData=JSON.parse(localStorage.profileData)
-      let profileName=profileData.username
-      let profileEmail=profileData.email
-      credential.innerHTML=`
-      <form action="" id="credentialForm">
-            <h3 id="formName">Profile</h3>
-            <div class="box">Name: ${profileName}</div>
-            <div class="box">Email: ${profileEmail}</div>
-            <input type="button" id="logout" value="login out" class="btn">
-        </form>`
-        logout.addEventListener('click',(e)=>{
-          let userloggedin=document.getElementById('userloggedin')
-        
-          userloggedin.remove()
-          signOut(auth).then(() => {
-            // Sign-out successful.
-            alert("user logged out")
-            loginState=0
-            localStorage.clear()
-            location.reload()
-          }).catch((error) => {
-            // An error happened.
-          });
-        })
-      });
+      let profileData = JSON.parse(localStorage.profileData)
+      let profileName = profileData.username
+      let profileEmail = profileData.email
+
+      let btnSend =document.querySelector('button')
+      btnSend.innerHTML=`hii ${profileName}`;
+
+      dropdownContent.innerHTML = `
+      
+        <div class="box">Name: ${profileName}</div>
+         <div class="box">Email:${profileEmail}</div>
+         <a href="favourite.html" onclick="displayDataList()">WatchList</a>
+        <a href="#">Link 2</a>
+        <input type="button" id="logout" value="login out" class="btn">
+        `
+      document.getElementById('logout').addEventListener('click', (e) => {
+        // let userloggedin = document.getElementById('userloggedin')
+        // userloggedin.remove()
+        document.getElementById('myDropdown12').style.visibility = 'visible';
+        document.getElementById('login-btn').style.visibility = 'hidden';
+        signOut(auth).then(() => {
+          // Sign-out successful.
+          alert("user logged out")
+          loginState = 0
+          localStorage.clear()
+          location.reload()
+        }).catch((error) => {
+          // An error happened.
+        });
+      })
+    });
 
   } else {
-    
-    // User is signed out
-    // ...
+
+  
   }
 });
 

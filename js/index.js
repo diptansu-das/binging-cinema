@@ -50,7 +50,7 @@ videoBtn.forEach(btn => {
 window.onload = () => {
 
     // const API_URl1 = `https://api.themoviedb.org/3/trending/all/week?api_key=594c8f852d2f55546b5698acac88ae46`   for week
-    const API_URl1= `https://api.themoviedb.org/3/trending/all/day?api_key=594c8f852d2f55546b5698acac88ae46`
+    const API_URl1 = `https://api.themoviedb.org/3/trending/all/day?api_key=594c8f852d2f55546b5698acac88ae46`
     // for day
     trengingDom(API_URl1)
     const API_URl2 = `https://api.themoviedb.org/3/discover/movie?with_genres=10749&primary_release_year=2020&api_key=594c8f852d2f55546b5698acac88ae46&page=1`
@@ -84,8 +84,8 @@ function trengingDom(url1) {
     function showMovies(movies) {
         main.innerHTML = ''
         movies.forEach((element) => {
-            const { poster_path} = element
-             const movieEl = document.createElement('div')
+            const { poster_path } = element
+            const movieEl = document.createElement('div')
             movieEl.classList.add('cover-item')
             movieEl.setAttribute("style", `background-image: url("${IMG_PATH + poster_path} ")`);
             main.appendChild(movieEl)
@@ -107,12 +107,12 @@ function popularDom(url1) {
         x = data.results;
         showMovies(x);
     }
-    
+
     function showMovies(movies) {
         main.innerHTML = ''
         movies.forEach((element) => {
-            const { poster_path} = element
-             const movieEl = document.createElement('div')
+            const { poster_path } = element
+            const movieEl = document.createElement('div')
             movieEl.classList.add('cover-item')
             movieEl.setAttribute("style", `background-image: url("${IMG_PATH + poster_path} ")`);
             main.appendChild(movieEl)
@@ -122,28 +122,50 @@ function popularDom(url1) {
 
 }
 
-function todayMovie(){
+function todayMovie() {
     console.log("todayss")
-    const API_URl12= `https://api.themoviedb.org/3/trending/all/day?api_key=594c8f852d2f55546b5698acac88ae46`
+    const API_URl12 = `https://api.themoviedb.org/3/trending/all/day?api_key=594c8f852d2f55546b5698acac88ae46`
     trengingDom(API_URl12)
 }
-function thisWeekMovie(){
+function thisWeekMovie() {
     console.log("this weel")
     const API_URl13 = `https://api.themoviedb.org/3/trending/all/week?api_key=594c8f852d2f55546b5698acac88ae46`
     trengingDom(API_URl13)
 }
-function streamingNow(){
+function streamingNow() {
     console.log("streaming ")
     const API_URl21 = `https://api.themoviedb.org/3/discover/movie?api_key=594c8f852d2f55546b5698acac88ae46&watch_region=US&with_watch_monetization_types=flatrate`
     popularDom(API_URl21)
 }
-function onTvNow(){
+function onTvNow() {
     console.log("on tv")
     const API_URl22 = `https://api.themoviedb.org/3/discover/tv?api_key=594c8f852d2f55546b5698acac88ae46&watch_region=US&with_watch_monetization_types=rent`
     popularDom(API_URl22)
 }
-function inThreatersNow(){
+function inThreatersNow() {
     const API_URl22 = `https://api.themoviedb.org/3/discover/movie?api_key=594c8f852d2f55546b5698acac88ae46&region=US&with_release_type=3|2`
     console.log("threaterss")
     popularDom(API_URl22)
+}
+
+
+
+
+//toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
 }
