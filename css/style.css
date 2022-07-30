@@ -2,7 +2,7 @@
 
 :root {
   --black: black;
---yellow: rgb(255 223 0)
+  --yellow: rgb(255 223 0)
 }
 
 * {
@@ -29,13 +29,13 @@ html {
   scroll-behavior: smooth;
 }
 
-body{
-background-color: var(--black);
+body {
+  background-color: var(--black);
 }
 
 section {
   padding: 2rem 9%;
-  background-color: var(--yellow);
+  background-color: black;
 }
 
 .heading {
@@ -82,14 +82,33 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 9%;
+  padding: 1rem 9%;
 }
 
 header .logo {
   font-size: 2.5rem;
   font-weight: bolder;
-  color: #fff;
-  text-transform: uppercase;
+  /* color: #fff; */
+  /* text-transform: uppercase; */
+}
+
+a:link {
+  text-decoration: none;
+}
+
+
+a:visited {
+  text-decoration: none;
+}
+
+
+a:hover {
+  text-decoration: none;
+}
+
+
+a:active {
+  text-decoration: none;
 }
 
 header .logo span {
@@ -117,12 +136,13 @@ header .icons i:hover {
   color: var(--orange);
 }
 
-.userloggedin{
-  width:1rem;
-  height:1rem;
+.userloggedin {
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
   background-color: rgb(79, 79, 228);
-  transform: translate(142%,-72%);
+
+  transform: translate(142%, -72%);
 }
 
 header .search-bar-container {
@@ -131,8 +151,8 @@ header .search-bar-container {
   left: 0;
   right: 0;
   padding: 1.5rem 2rem;
-  background: #333;
-  border-top: .1rem solid rgba(255, 255, 255, .2);
+  background: #11110d;
+  border-top: 0.1rem solid rgba(255, 255, 255, .2);
   display: flex;
   align-items: center;
   z-index: 1001;
@@ -167,6 +187,7 @@ header .search-bar-container label:hover {
   position: fixed;
   top: -120%;
   left: 0;
+
   z-index: 10000;
   min-height: 100vh;
   width: 100%;
@@ -249,11 +270,11 @@ header .search-bar-container label:hover {
 }
 
 #menu-bar {
-  color: #fff;
-  border: .1rem solid #fff;
-  border-radius: .5rem;
+  color: #060505;
+  border: 0.1rem solid #090808;
+  border-radius: 0.5rem;
   font-size: 3rem;
-  padding: .5rem 1.2rem;
+  padding: 0.5rem 1.2rem;
   cursor: pointer;
   display: none;
 }
@@ -275,15 +296,20 @@ header .search-bar-container label:hover {
 .home .content h3 {
   font-size: 4.5rem;
   color: #fff;
+  width: 77rem;
+  text-align: center;
   text-transform: uppercase;
-  text-shadow: 0 .3rem .5rem rgba(0, 0, 0, .1);
+  text-shadow: 0 0.3rem 0.5rem rgb(0 0 0 / 10%);
 }
 
 .home .content p {
   font-size: 2.5rem;
   color: #fff;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
+  color: #e7e7e7;
 }
+
+
 
 .home .video-container img {
   position: absolute;
@@ -407,10 +433,10 @@ header .search-bar-container label:hover {
   header .navbar {
     position: absolute;
     top: 100%;
-    right: 0;
-    left: 0;
-    background: #333;
-    border-top: .1rem solid rgba(255, 255, 255, .2);
+    right: 0px;
+    left: 0px;
+    background: rgb(203 200 42);
+    border-top: 0.1rem solid rgba(255, 255, 255, 0.2);
     padding: 1rem 2rem;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
   }
@@ -580,12 +606,43 @@ main {
 
 }
 
+.movie-poster {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
 .movie-poster img {
   width: 22rem;
   height: 30rem;
-  position: absolute;
-  top: 65px;
+  top: 36px;
   margin-left: -75px;
+  position: relative;
+  /* opacity: 0.899; */
+  filter: brightness(70%);
+  /* background-image: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%); */
+}
+
+
+.theImages1 {
+  position: absolute;
+  top: 276px;
+  bottom: 0;
+  left: -64px;
+  right: 40px;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+
+  transition: .3s ease;
+ 
+  font-size: 40px;
+   flex-wrap: nowrap;
+  word-spacing: 30px;
+}
+
+.movie-poster:hover .theImages1 {
+  opacity: 1;
 }
 
 .movie-title {
@@ -594,45 +651,54 @@ main {
 
 .movie-title h3 {
   text-align: left;
-  font-size: 2rem;
+  font-size: 32px;
   color: #c4b700;
+  position: relative;
+  bottom: 27px;
+}
+
+.director-wrap {
+  position: relative;
+  bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.director-wrap img {
+  height: 22px;
+  margin-top: -2px;
+  margin-right: 25px;
 }
 
 .overview {
   text-align: left;
-  width: 32rem;
-  max-height:100px;
-  overflow-y:scroll;
+  width: 34rem;
+  max-height: 90px;
+  overflow-y: scroll;
   scrollbar-width: none;
   /* overflow-y: hidden; */
+  position: relative;
+  bottom: 15px;
+
 }
+
 .overview::-webkit-scrollbar {
   display: none;
 }
 
 .more-details {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  /* align-content: stretch; */
-  /* justify-content: space-evenly; */
-  align-items: flex-start;
+  flex-direction: row;
+  position: relative;
+  bottom: 10px;
+  justify-content: space-between;
 }
 
 .more-details img {
   height: 400px;
   position: absolute;
   /* bottom: 164px; */
-}
-
-.binging-rating {
-  margin-left: 97px;
-  /* bottom: 10px; */
-  margin-top: 17px;
-}
-
-.binging-rating img {
-  height: 34px;
 }
 
 
@@ -679,7 +745,7 @@ main {
   position: relative;
   display: inline-block;
   margin: 8px 8px;
-  box-shadow: 2px 2px 4px #bbb;
+  /* box-shadow: 2px 2px 4px #bbb; */
   border-top-right-radius: 4px;
   width: 200px;
   height: 300px;
@@ -749,8 +815,301 @@ main {
   color: var(--theme-color);
 }
 
+#search-value {
+  height: 3rem;
+  width: 23rem;
+  color: var(--yellow);
+  font-size: 2rem;
+  background: transparent;
+  border-bottom: 2px solid var(--yellow);
+}
+
+
+#btn-search {
+  width: 6rem;
+  background-color: var(--yellow);
+  border: none;
+  border-radius: 2px;
+  margin-left: 1px;
+}
+
 #searchFilter {
   display: flex;
 }
 
 /* filter option end */
+
+/* toggle */
+#tgle-1 {
+  background: black;
+}
+
+#searchFilter {
+  display: flex;
+  margin-right: 355px;
+
+}
+
+
+#btn-home {
+  background-color: var(--yellow);
+  color: black;
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  top: 5rem;
+}
+
+/* loading button */
+
+.loader,
+.loader:before,
+.loader:after {
+  background: #d9e70d;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+
+.loader {
+  color: #d9e70d;
+  text-indent: -9999em;
+  margin: 88px auto;
+  position: relative;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: '';
+}
+
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.loader:after {
+  left: 1.5em;
+}
+
+@-webkit-keyframes load1 {
+
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+
+@keyframes load1 {
+
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+
+/* auto hide button */
+.dropbtn {
+  background-color: #161818;
+  color: white;
+  padding: 11px;
+  font-size: 11px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #141617;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  /* display: inline-block; */
+  display: inline;
+  right: 37px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #efef6f;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+#myDropdown12 {
+  visibility: hidden;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content div {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd
+}
+
+.dropdown-content>.box:hover {
+  background-color: #ddd
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+  display: block;
+}
+
+
+/* navpill */
+
+.myNavPills {
+  font-size: 20px;
+  background-color: var(--yellow);
+  /* display: block; */
+  display: inline-flex;
+  border-radius: 10px;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #111213;
+  border-radius: 10px;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #0b0b0c;
+  text-decoration: none;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+  color: black;
+}
+
+.nav-link.disabled {
+  color: black;
+  pointer-events: none;
+  cursor: default;
+}
+
+
+/* newprofile */
+.movie-profile {
+  width: 89%;
+  height: 80rem;
+  border: 2px solid red;
+  margin: auto;
+  color: white;
+  display: flex;
+}
+
+.profile-container {
+  width: 89%;
+  height: 80rem;
+  border: 2px solid red;
+  margin: auto;
+  color: white;
+  display: flex;
+}
+
+
+.movie-profile::before {
+  content: "";
+  background: url(/images/thumb-1920-179218.jpg) no-repeat center center/cover;
+  position: absolute;
+  width: 92%;
+  height: 100%;
+  top: 0;
+  margin: auto;
+  box-shadow: inset 2px 2px 20px 20px black;
+  left: 0;
+  right: 0;
+  filter: blur(1.7px) brightness(20%);
+  z-index: -3;
+}
+
+.profile-poster {
+  width: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10rem;
+}
+
+.profile-poster img {
+  width: 32rem;
+  height: 49rem;
+  /* position: relative;
+    top: 14rem;
+    left: 13rem; */
+}
+
+.profile-details-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 50rem;
+  /* align-items: center; */
+  justify-content: center;
+  border: 2px solid rgb(255, 217, 0);
+
+}
+
+.profile-details {
+  border: 2px solid rgb(0, 68, 255);
+  height: 50rem;
+  margin-top: 102px;
+  width: 50em;
+}
+
+.profile-title {
+  color: white;
+  font-size: 4rem;
+  color: var(--yellow);
+}
