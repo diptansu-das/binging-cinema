@@ -243,6 +243,7 @@ header .search-bar-container label:hover {
 .login-form-container form .btn {
   display: block;
   width: 100%;
+  background: #060505;
 }
 
 .login-form-container form p {
@@ -435,7 +436,7 @@ header .search-bar-container label:hover {
     top: 100%;
     right: 0px;
     left: 0px;
-    background: rgb(203 200 42);
+    background: var(--yellow);
     border-top: 0.1rem solid rgba(255, 255, 255, 0.2);
     padding: 1rem 2rem;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
@@ -450,7 +451,7 @@ header .search-bar-container label:hover {
     border-radius: .5rem;
     padding: 1.5rem;
     margin: 1.5rem 0;
-    background: #222;
+    background: white;
   }
 
 }
@@ -525,6 +526,7 @@ main {
 
 .movie-info span.orange {
   color: rgb(0, 0, 0);
+  margin-left: 48px;
 }
 
 .movie-info span.red {
@@ -962,7 +964,7 @@ main {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #efef6f;
+  background-color: var(--yellow);
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -1112,4 +1114,9 @@ main {
   color: white;
   font-size: 4rem;
   color: var(--yellow);
+}
+.nextloadHtml{
+background: #ebeb0b;
+color: black;
+text-align: center;
 }

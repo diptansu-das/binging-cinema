@@ -38,30 +38,30 @@ formClose.addEventListener('click', () => {
 
 
 
-const mainFavorite=document.querySelector("#main-favourite")
- const moive =JSON.parse(localStorage.getItem('favoriteMovies')) || []
- const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
- showMovies(moive)
-    function getClassByrate(vote) {
-        if (vote >= 8) {
-            return 'green'
-        }
-        else if (vote >= 5) {
-            return 'orange'
-        }
-        else {
-            return 'red'
-        }
+const mainFavorite = document.querySelector("#main-favourite")
+const moive = JSON.parse(localStorage.getItem('favoriteMovies')) || []
+const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
+showMovies(moive)
+function getClassByrate(vote) {
+    if (vote >= 8) {
+        return 'green'
     }
+    else if (vote >= 5) {
+        return 'orange'
+    }
+    else {
+        return 'red'
+    }
+}
 
-    function showMovies(movies) {
-        mainFavorite.innerHTML = ''
-        movies.forEach((element, index) => {
-            const { name,title, poster_path, vote_average,id } = element
+function showMovies(movies) {
+    mainFavorite.innerHTML = ''
+    movies.forEach((element, index) => {
+        const { name, title, poster_path, vote_average, id } = element
 
-            const movieEl = document.createElement('div')
-            movieEl.classList.add('movie')
-            movieEl.innerHTML = `
+        const movieEl = document.createElement('div')
+        movieEl.classList.add('movie')
+        movieEl.innerHTML = `
        <img src="${IMG_PATH + poster_path}" alt="${title}" onerror="this.src='images/error.png'"  onclick="pop(${index})" >
         <div class="movie-info">
             <h3>${title || name}</h3>
@@ -73,55 +73,83 @@ const mainFavorite=document.querySelector("#main-favourite")
 
         mainFavorite.appendChild(movieEl)
 
-        })
-    }
-
-
-
+    })
+}
+// let x = {};
+let movie_crew = [];
 function pop(index) {
-    console.log(moive[index])
     const lightbox = document.getElementById('lightbox')
     const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
     const Tool = document.createElement('div')
     lightbox.innerHTML = ''
     Tool.classList.add('popup')
     Tool.setAttribute("id", "popup");
-    Tool.innerHTML = ` <div class="card" >
-    <div class="movie-poster">
-    <img src="${IMG_PATH + moive[index].poster_path}" height="233px">
-    </div>
-    <div class="movie-details">
-      <div class="movie-title">
-        
-        <h3>${moive[index].title || moive[index].name}</h3>
-      </div>
-      
-      <div class="overview-wrap">
-        <p class="overview">${moive[index].overview}</p>
-        <br>
-      </div>
-      <div class="more-details">
-        <h4 class="genre">${getGenre(moive[index].genre_ids)}</h4>
-        <h4 class="release-date"> Release Date -${getDate(moive[index].release_date || moive[index].first_air_date )}</h4>
-        <h4 class="genre">Language -English</h4>
-       <br>
-      </div>
-      <div class="binging-rating">
-      <h4>Binging Cinema Rating</h4>
-     <img src= "${getStar(moive[index].vote_average)}" >
-      </div>
-    </div>
-  </div>`;
+    let dirName = "";
+    const new_url = `https://api.themoviedb.org/3/movie/${moive[index].id}/credits?api_key=594c8f852d2f55546b5698acac88ae46&language=en-US `
 
-    lightbox.appendChild(Tool)
+    async function getMoviesForDirector(new_url) {
+        const result = await fetch(new_url)
+        const credit_data = await result.json()
+        movie_crew = credit_data.crew
+        movie_crew.forEach((element) => {
+            const { job, name } = element
+            if (job == "Director") {
+                dirName += name + " "
+            }
+        })
+        Tool.innerHTML = ` <div class="card" >
+            <div class="movie-poster">
+            <img  id="moviePosterAfter" src="${IMG_PATH + moive[index].poster_path}" height="233px" >
+              <div class="theImages1">
+               <a onClick=getMydate()><i class="fa fa-heart" aria-hidden="true"></i></a>
+               <a onClick=getMydate1()><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+               <a onClick=getMydate2()><i class="fa fa-eye" aria-hidden="true"></i></a>
+              </div>
+            </div>
+            <div class="movie-details">
+              <div class="movie-title">
+                <h3>${moive[index].title || moive[index].name}</h3>
+                
+              </div>
+              <div class="director-wrap">
+                <p class="director">Directed By:<span style="text-decoration:underline"> ${dirName} </span></p>
+                <img src= "${getStar(moive[index].vote_average)}" > 
+                
+              </div>
+              <div class="overview-wrap">
+                <p class="overview">${moive[index].overview}</p>
+              </div>
+              
+              <div class="more-details">
+                <h4 class="genre">${getGenre(moive[index].genre_ids)}</h4>
+                <h4 class="release-date">${getDate(moive[index].release_date || moive[index].first_air_date )}}</h4>
+                <h4 class="genre">English</h4>
+             </div>  
+             
+             
+             
+             <a href="content_profile.html" class="btn btn-primary btn-lg disabled nextloadHtml" tabindex="-1" role="button" aria-disabled="true">Primary link</a>
+             
+            </div>
+          </div>`;
 
-    const backbox = document.getElementById('background')
-    backbox.setAttribute("style", `background-image: url('${IMG_PATH + moive[index].backdrop_path}'),url('images/load.png')`);
+
+        lightbox.appendChild(Tool)
+        let movie_id = moive[index].id;
+
+        localStorage.setItem('profileID', movie_id);
+        // console.log(localStorage.getItem('profileID'));
+        const backbox = document.getElementById('background')
+        backbox.setAttribute("style", `background-image: url('${IMG_PATH + moive[index].backdrop_path}'),url('images/load.png')`);
+        document.getElementById("background").style.filter = " brightness(65%)";
+
+        document.getElementById('blackOverlay').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('background').style.display = 'block';
 
 
-    document.getElementById('blackOverlay').style.display = 'block';
-    document.getElementById('popup').style.display = 'block';
-    document.getElementById('background').style.display = 'block';
+    }
+    getMoviesForDirector(new_url)
 
 
 }
@@ -251,29 +279,30 @@ function closePopup() {
 
 function deleteNote(id) {
     //   console.log("I am deleting", index);
-    
-    const moive =JSON.parse(localStorage.getItem('favoriteMovies')) || []
-    
+
+    const moive = JSON.parse(localStorage.getItem('favoriteMovies')) || []
+
     const index = moive.findIndex(element => element.id === id)
-    moive.splice(index,1)
+    moive.splice(index, 1)
     localStorage.setItem('favoriteMovies', JSON.stringify(moive))
+    window.dispatchEvent(new Event('storage'))
     showMovies(moive)
-    }
-    //toggle between hiding and showing the dropdown content */
+}
+//toggle between hiding and showing the dropdown content */
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
-  }
-  
-  // Close the dropdown menu if the user clicks outside of it
-  window.onclick = function(event) {
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
     if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
         }
-      }
     }
-  }
+}

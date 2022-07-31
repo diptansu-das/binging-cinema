@@ -30,9 +30,9 @@ const loginBtn = document.getElementById('login-btn')
 const credential = document.getElementById('credentialForm')
 const formClose = document.querySelector('#form-close');
 const dropdownContent = document.getElementById('myDropdown');
-const dropdownDiv=document.getElementById('myDropdown12')
-const container=document.querySelector(".login-form-container")
-const icons=document.getElementById('impIcons')
+const dropdownDiv = document.getElementById('myDropdown12')
+const container = document.querySelector(".login-form-container")
+const icons = document.getElementById('impIcons')
 
 const user = auth.currentUser
 
@@ -55,13 +55,8 @@ document.getElementById('signupcontainer').addEventListener('click', (e) => {
   });
 
 
-  dropdownDiv.style.visibility = 'none';
-  loginBtn.style.visibility = 'visible';
 
-
-
-
-// for signup of new user
+  // for signup of new user
 
   signup.addEventListener('click', (e) => {
     e.preventDefault()
@@ -82,8 +77,8 @@ document.getElementById('signupcontainer').addEventListener('click', (e) => {
         })
 
         // alert("user created")
-        container.style.background='white'
-        container.innerHTML=`<div class="loader"></div>`
+        container.style.background = 'white'
+        container.innerHTML = `<div class="loader"></div>`
         // ...
       })
       .catch((error) => {
@@ -119,8 +114,8 @@ login.addEventListener('click', (e) => {
         last_login: dt
       })
       // alert('user logged in')
-      container.style.background='white'
-      container.innerHTML=`<div class="loader"></div>`
+      container.style.background = 'white'
+      container.innerHTML = `<div class="loader"></div>`
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -136,8 +131,8 @@ formClose.addEventListener('click', () => {
   }
 });
 
-function forspinner(){
-      loginForm.classList.remove('active')
+function forspinner() {
+  loginForm.classList.remove('active')
 }
 
 
@@ -149,14 +144,10 @@ onAuthStateChanged(auth, (user) => {
 
   const userLoggedIn = document.createElement('div')
   if (user) {
-    console.log("if user is called")
-    const uid = user.uid;
-  
-  
     loginBtn.style.visibility = 'hidden';
     dropdownDiv.style.visibility = 'visible';
 
-    setTimeout(forspinner,4000)
+    setTimeout(forspinner, 4000)
 
     const userData = ref(database, 'users/' + user.uid);
 
@@ -167,9 +158,12 @@ onAuthStateChanged(auth, (user) => {
       let profileData = JSON.parse(localStorage.profileData)
       let profileName = profileData.username
       let profileEmail = profileData.email
-
-      let btnSend =document.querySelector('button')
-      btnSend.innerHTML=`hii ${profileName}`;
+      let WatchList = JSON.stringify(profileData.Watchlist) || []
+      if (!(WatchList.length === 0)) {
+        localStorage.setItem('favoriteMovies', WatchList)
+      }
+      let btnSend = document.querySelector('button')
+      btnSend.innerHTML = `hii ${profileName}`;
 
       dropdownContent.innerHTML = `
       
@@ -182,8 +176,8 @@ onAuthStateChanged(auth, (user) => {
       document.getElementById('logout').addEventListener('click', (e) => {
         // let userloggedin = document.getElementById('userloggedin')
         // userloggedin.remove()
-        document.getElementById('myDropdown12').style.visibility = 'visible';
-        document.getElementById('login-btn').style.visibility = 'hidden';
+        document.getElementById('myDropdown12').style.visibility = 'hidden';
+        document.getElementById('login-btn').style.visibility = 'visible';
         signOut(auth).then(() => {
           // Sign-out successful.
           alert("user logged out")
@@ -192,13 +186,22 @@ onAuthStateChanged(auth, (user) => {
           location.reload()
         }).catch((error) => {
           // An error happened.
+          console.log(error)
         });
       })
     });
+    window.addEventListener('storage', () => {
+      let userWatchlist = JSON.parse(localStorage.getItem('favoriteMovies')) || []
+      console.log(userWatchlist)
 
+
+      update(ref(database, 'users/' + user.uid), {
+        Watchlist: userWatchlist
+      })
+    })
   } else {
 
-  
+
   }
 });
 

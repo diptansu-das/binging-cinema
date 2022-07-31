@@ -6,6 +6,7 @@ let formClose = document.querySelector('#form-close');
 let menu = document.querySelector('#menu-bar');
 let navbar = document.querySelector('.navbar');
 let videoBtn = document.querySelectorAll('.vid-btn');
+let dropdownDiv=document.querySelector("#myDropdown12")
 
 window.onscroll = () => {
     searchBtn.classList.remove('fa-times');
@@ -168,81 +169,105 @@ let movie_dir = [];
 
 function getDirector(index) {
     let dirName = "UnKnown";
-    const new_url = `https://api.themoviedb.org/3/movie/${x[index].id}/credits?api_key=594c8f852d2f55546b5698acac88ae46&language=en-US`
+    // const new_url = `https://api.themoviedb.org/3/movie/${x[index].id}/credits?api_key=594c8f852d2f55546b5698acac88ae46&language=en-US`
 
-    async function getMoviesForDirector(new_url) {
-        const result = await fetch(new_url)
-        const credit_data = await result.json()
-        movie_dir = credit_data.crew
+    // async function getMoviesForDirector(new_url) {
+    //     const result = await fetch(new_url)
+    //     const credit_data = await result.json()
+    //     movie_dir = credit_data.crew
 
-    }
-    getMoviesForDirector(new_url)
-
-
-
-    movie_dir.forEach((element) => {
-        const { job, name } = element
-        if (job == "Director") {
-            dirName = name
-        }
-    })
+    // }
+    // getMoviesForDirector(new_url)
+    
+    // movie_dir.forEach((element) => {
+    //     const { job, name } = element
+    //     if (job == "Director") {
+    //         dirName = name
+    //     }
+    // })
     return dirName;
 }
 
 function pop(index) {
-
+    console.log(x[index].id)
     const lightbox = document.getElementById('lightbox')
     const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
     const Tool = document.createElement('div')
     lightbox.innerHTML = ''
     Tool.classList.add('popup')
     Tool.setAttribute("id", "popup");
-    Tool.innerHTML = ` <div class="card" >
-    <div class="movie-poster">
-    <img  id="moviePosterAfter" src="${IMG_PATH + x[index].poster_path}" height="233px" >
-      <div class="theImages1">
-       <a onClick=getMydate()><i class="fa fa-heart" aria-hidden="true"></i></a>
-       <a onClick=getMydate1()><i class="fa fa-bookmark" aria-hidden="true"></i></a>
-       <a onClick=getMydate2()><i class="fa fa-eye" aria-hidden="true"></i></a>
-      </div>
-    </div>
-    <div class="movie-details">
-      <div class="movie-title">
-        <h3>${x[index].name}</h3>
-        
-      </div>
-      <div class="director-wrap">
-        <p class="director">Directed By:<span style="text-decoration:underline"> ${getDirector(index)} </span></p>
-        <img src= "${getStar(x[index].vote_average)}" > 
-        
-      </div>
-      <div class="overview-wrap">
-        <p class="overview">${x[index].overview}</p>
-      </div>
-      
-      <div class="more-details">
-        <h4 class="genre">${getGenre(x[index].genre_ids)}</h4>
-        <h4 class="release-date">${getDate(x[index].first_air_date)}</h4>
-        <h4 class="genre">English</h4>
-     </div>  
-     
-     
-     
-     <a href="content_profile.html" class="btn btn-primary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Primary link</a>
-     
-    </div>
-  </div>`;
+    let dirName = " ";
+    const new_url = `https://api.themoviedb.org/3/tv/${x[index].id}/credits?api_key=594c8f852d2f55546b5698acac88ae46&language=en-US`
 
-    lightbox.appendChild(Tool)
+    async function getExecutive(new_url) {
+        const result = await fetch(new_url)
+        const credit_data = await result.json()
+        movie_crew = credit_data.crew
+        movie_crew.forEach((element) => {
+            const { job, name } = element
+            if (job == "Executive Producer") {
+                dirName+= name+" "
+            }
+            if (job == "Director") {
+                dirName+= name+" "
+            }
+            if(job=="Series Director"){
+                dirName+=name+" "
+            }
+        })
+        Tool.innerHTML = ` <div class="card" >
+        <div class="movie-poster">
+        <img  id="moviePosterAfter" src="${IMG_PATH + x[index].poster_path}" height="233px" >
+          <div class="theImages1">
+           <a onClick=getMydate()><i class="fa fa-heart" aria-hidden="true"></i></a>
+           <a onClick=getMydate1()><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+           <a onClick=getMydate2()><i class="fa fa-eye" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="movie-details">
+          <div class="movie-title">
+            <h3>${x[index].name}</h3>
+            
+          </div>
+          <div class="director-wrap">
+            <p class="director">Created By:<span style="text-decoration:underline"> ${dirName} </span></p>
+            <img src= "${getStar(x[index].vote_average)}" > 
+            
+          </div>
+          <div class="overview-wrap">
+            <p class="overview">${x[index].overview}</p>
+          </div>
+          
+          <div class="more-details">
+            <h4 class="genre">${getGenre(x[index].genre_ids)}</h4>
+            <h4 class="release-date">${getDate(x[index].first_air_date)}</h4>
+            <h4 class="genre">English</h4>
+         </div>  
+         
+         
+         
+         <a href="content_profile.html" class="btn btn-primary btn-lg disabled nextloadHtml" tabindex="-1" role="button" aria-disabled="true">Primary link</a>
+         
+        </div>
+      </div>`;
+    
+    
+        lightbox.appendChild(Tool)
+        let movie_id=x[index].id;
+    
+        localStorage.setItem('profileID',movie_id);
+        // console.log(localStorage.getItem('profileID'));
+        const backbox = document.getElementById('background')
+        backbox.setAttribute("style", `background-image: url('${IMG_PATH + x[index].backdrop_path}'),url('images/load.png')`);
+        document.getElementById("background").style.filter = " brightness(65%)";
+    
+        document.getElementById('blackOverlay').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('background').style.display = 'block';
 
-    const backbox = document.getElementById('background')
-    backbox.setAttribute("style", `background-image: url('${IMG_PATH + x[index].backdrop_path}'),url('images/load.png')`);
-    document.getElementById("background").style.filter = " brightness(65%)";
 
-    document.getElementById('blackOverlay').style.display = 'block';
-    document.getElementById('popup').style.display = 'block';
-    document.getElementById('background').style.display = 'block';
-
+    }
+    getExecutive(new_url)
 
 }
 
@@ -382,15 +407,23 @@ function getMydate2(){
 
 var counter = 1
 function addFavoriteItem(index) {
+    
+    var computedStyle = window.getComputedStyle(dropdownDiv, null); 
+    var visiblityValue = computedStyle.getPropertyValue("visibility")
+    console.log(visiblityValue)
+    if (visiblityValue == "hidden") {
+        alert("Please login to add "+x[index].name+" to your watchlist")
+    }
+    else{
 
-    console.log("before for " + counter )
-    let element = document.getElementById('eye-' + index).getElementsByClassName("fa")[0]
-    let count=document.getElementById('count-'+index)
-    let countV=count.innerText
-    console.log("countV"+countV)
-    if (counter & countV) 
-    {
-        element.classList.remove("fa-eye")
+        console.log("before for " + counter )
+        let element = document.getElementById('eye-' + index).getElementsByClassName("fa")[0]
+        let count=document.getElementById('count-'+index)
+        let countV=count.innerText
+        console.log("countV"+countV)
+        if (counter & countV) 
+        {
+            element.classList.remove("fa-eye")
         element.classList.add("fa-eye-slash")
         console.log("counterer= " + counter )
         count.innerHTML="0"
@@ -399,6 +432,7 @@ function addFavoriteItem(index) {
         const movie = x.find(item => item.id === Number(x[index].id))
         list.push(movie)
         localStorage.setItem('favoriteMovies', JSON.stringify(list))
+        window.dispatchEvent( new Event('storage') )
     }
     else {
         count.innerHTML="1"
@@ -410,9 +444,9 @@ function addFavoriteItem(index) {
         const mIndex = moive.findIndex(element => element.id === Number(x[index].id))
         moive.splice(mIndex,1)
         localStorage.setItem('favoriteMovies', JSON.stringify(moive))
+        window.dispatchEvent( new Event('storage') )
     }
-
-
+    }
 }
 // add filter values
 
